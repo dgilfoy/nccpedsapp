@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "skipLibCheck": true
+    },
+    "include": [
+        "./src/**/*"
+    ],
+    "files": [
+        "src/index.d.ts"
+    ],
+    "lib": ["es6"]
+}
