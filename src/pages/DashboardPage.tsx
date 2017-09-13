@@ -89,7 +89,9 @@ export default class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">
-            <div style={buttonItemWrapper}><Link to="/resources">CPG/Algorithms</Link></div>
+            <div style={buttonItemWrapper}>
+              <Link to="/resources">CPG/Algorithms</Link>
+            </div>
             <div style={buttonItemWrapper}>
               <ExternalLink
                 absolutePath="tel:+3016767337">Admin Phone
@@ -97,9 +99,15 @@ export default class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">
-            <div style={buttonItemWrapper}><Link to="/badge-extras">Badge Extras</Link></div>
-            <div style={buttonItemWrapper}><Link to="/directory">Phone Directory</Link></div>
-            <div style={buttonItemWrapper}><Link to="/oncall">On Call</Link></div>
+            <div style={buttonItemWrapper}>
+              <Link to="/pdf/WR-Emerg-Code-Badge.pdf">Badge Extras</Link>
+            </div>
+            <div style={buttonItemWrapper}>
+              <Link to="/directory">Phone Directory</Link>
+            </div>
+            <div style={buttonItemWrapper}>
+              <Link to="/oncall">On Call</Link>
+            </div>
           </div>
         </div>
         <div style={versionStyle}>0.0.1</div>

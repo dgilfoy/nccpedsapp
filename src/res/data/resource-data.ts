@@ -33,14 +33,19 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 const data =[
-  //{id:1,title:'The Rudder',link: require('../files/The_Rudder_July17.pdf'), isExternal:false},
-  //{id:2,title:'MSC Stakeholder',link: require('../files/MSC_Stakeholder_2015.pdf'), isExternal:false},
-  {id:3,title:'Navy.com',link:'https://www.navy.com/', isExternal:true},
-  {id:4,title:'Relay Health',link:'https://app.mil.relayhealth.com/', isExternal:true},
-  {id:5,title:'Fitness & Health Living',link:'http://www.navyfitness.org/', isExternal:true},
-  {id:6,title:'Suicide Prevention Lifeline',link:'https://suicidepreventionlifeline.org/', isExternal:true},
-  {id:7,title:'DoN Freedom of Information',link:'http://www.secnav.navy.mil/foia/Pages/default.aspx', isExternal:true},
-  {id:8,title:'Ask the Corps Chief',link:'/ask-the-chief', isExternal:false}
+  {id:1, title:'Asthma Clinical Practice Guideline',link: require('../files/Asthma-Clinical-Practice-Guideline.pdf'), isExternal:false},
+  {id:2, title:'CPG ADHD AAP',link: require('../files/CPG-ADHD-AAP.pdf'), isExternal:false},
+  {id:3, title:'CPG AOM AAP',link: require('../files/CPG-AOM-AAP.pdf'), isExternal:false},
+  {id:4, title:'CPG Bronchiolitis AAP',link: require('../files/CPG-Bronchiolitis-AAP.pdf'), isExternal:false},
+  {id:5, title:'CPG BRUE AAP',link: require('../files/CPG-BRUE-AAP.pdf'), isExternal:false},
+  {id:6, title:'CPG Febrile Seizure-AAP',link: require('../files/CPG-Febrile-Seizure-AAP.pdf'), isExternal:false},
+  {id:7, title:'CPG OSA AAP',link: require('../files/CPG-OSA-AAP.pdf'), isExternal:false},
+  {id:8, title:'CPG Shock 2007',link: require('../files/CPG-Shock-2007.pdf'), isExternal:false},
+  {id:9, title:'CPG Sinusitis AAP',link: require('../files/CPG-Sinusitis-AAP.pdf'), isExternal:false},
+  {id:10,title:'CPG T2DM AAP',link: require('../files/CPG-T2DM-AAP.pdf'), isExternal:false},
+  {id:11,title:'CPG UTI AAP',link: require('../files/CPG-UTI-AAP.pdf'), isExternal:false},
+  {id:12,title:'DKA Protocol WRNMMC 2015',link: require('../files/DKA-Protocol-WRNMMC-2015.pdf'), isExternal:false},
+  {id:13,title:'Pyloric Stenosis Pathway',link: require('../files/Pyloric-Stenosis-Pathway.pdf'), isExternal:false}
 ];
 
 export default data;

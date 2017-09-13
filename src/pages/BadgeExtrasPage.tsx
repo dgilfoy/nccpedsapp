@@ -48,17 +48,6 @@ export default class BadgeExtrasPage extends React.Component<Props, State>{
   componentWillMount(){
     this.setState({version:this.props['version']});
   }
-  /**
-   * 
-   * 
-   * @returns 
-   * @memberof BadgeExtrasPage
-   */
-  setMaxHeight(){
-    let scrHeight = this.props.appPage.screen.height,
-      multi = ( scrHeight > 700 ) ? .65 : .59;
-    return ( scrHeight * multi );
-  }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
     

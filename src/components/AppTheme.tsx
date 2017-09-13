@@ -39,7 +39,7 @@ import PhoneDirectoryPage from '../pages/PhoneDirectoryPage';
 import BadgeExtrasPage from '../pages/BadgeExtrasPage';
 import OnCallListPage from '../pages/BadgeExtrasPage';
 import ResourcesPage from '../pages/ResourcesPage';
-//import PdfViewerPage from '../pages/PdfViewerPage';
+import PdfViewerPage from '../pages/PdfViewerPage';
 import { Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -173,7 +173,7 @@ class App extends React.Component<Props, State>{
         <Route path="/oncall" render={this.renderRouteComponent(OnCallListPage)} />
         <Route path="/badge-extras" render={this.renderRouteComponent(BadgeExtrasPage)} />
         <Route path="/resources" render={this.renderRouteComponent(ResourcesPage)} />
-        
+        <Route exact path="/pdf/:file" render={this.renderRouteComponent(PdfViewerPage)} />
       </div>
     </div>
     </MuiThemeProvider>;
