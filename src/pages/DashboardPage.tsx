@@ -44,6 +44,8 @@ import {
 } from '../styles/dashboardStyles';
 import ExternalLink from '../components/ExternalLink';
 
+const logoLarge = require('../res/images/logoLarge.png');
+
 export interface Props {
   appPage: AppPageInterface;
 }
@@ -51,7 +53,7 @@ export interface State {}
 
 export default class DashboardPage extends React.Component<Props, State>{
   componentWillMount(){
-    this.setState({version:this.props['version']});
+    
   }
   /**
    * 
@@ -70,7 +72,7 @@ export default class DashboardPage extends React.Component<Props, State>{
       minHeight: this.setMaxHeight()
     }
     return (
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', background: 'url(' + logoLarge + ') center no-repeat'}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">

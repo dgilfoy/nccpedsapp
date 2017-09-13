@@ -36,8 +36,9 @@ import * as React from 'react';
 //import {Link} from 'react-router-dom';
 import AppLogoBar  from '../components/AppLogoBar';
 import {AppPageInterface} from '../components/AppTheme';
-
 //import ExternalLink from '../components/ExternalLink';
+
+const logo = require('../res/images/mpoc.png');
 
 export interface Props {
   appPage: AppPageInterface;
@@ -45,8 +46,7 @@ export interface Props {
 export interface State {}
 
 export default class OnCallListPage extends React.Component<Props, State>{
-  componentWillMount(){
-    this.setState({version:this.props['version']});
+  componentWillMount(){  
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
@@ -54,7 +54,62 @@ export default class OnCallListPage extends React.Component<Props, State>{
     return (
       <div style={{position:'relative'}}>
        <AppLogoBar hasPaddingTop={false}/>
-        On call page
+        <div>
+          <div><img src={logo} /></div>
+          <div>
+            <h1>Military Pediatrics OneCall</h1>
+            <p>
+              Comprehensive Inpatient &amp; Outpatient Pediatric Subspecialty Care &amp; Consultation 
+              for TRICARE in the MidAtlantic Region &amp; WorldWide
+            </p>
+          </div>
+        </div>
+        <div>
+          <h2>Call for Admission/Transport</h2>
+        </div>
+        <div>
+          <div><h3>NICU On Call</h3></div>
+          <div><h3>PICU On Call</h3></div>
+        </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>Adol</td>
+                <td>Allergy</td>
+                <td>Cards</td>
+              </tr>
+              <tr>
+                <td>Devo</td>
+                <td>Endo</td>
+                <td>ENT</td>
+              </tr>
+              <tr>
+                <td>Genetics</td>
+                <td>GI</td>
+                <td>Heme/Onc</td>
+              </tr>
+              <tr>
+                <td>ID</td>
+                <td>Nephro</td>
+                <td>Neuro</td>
+              </tr>
+              <tr>
+                <td>Ophtho</td>
+                <td>Ortho</td>
+                <td>Pulm</td>
+              </tr>
+              <tr>
+                <td>Rheum</td>
+                <td>Surgery</td>
+                <td>Urology</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h4>More Information</h4>
+        </div>
       </div>
     )
   }

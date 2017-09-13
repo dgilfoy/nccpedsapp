@@ -36,36 +36,35 @@ import * as React from 'react';
 //import {Link} from 'react-router-dom';
 import AppLogoBar  from '../components/AppLogoBar';
 import {AppPageInterface} from '../components/AppTheme';
+import phoneNumbers from '../res/data/phoneDirectory';
 
 //import ExternalLink from '../components/ExternalLink';
 
 export interface Props {
   appPage: AppPageInterface;
 }
-export interface State {}
+export interface State {
+  phoneDir,
+  currentList
+}
 
 export default class PhoneDirectoryPage extends React.Component<Props, State>{
   componentWillMount(){
-    this.setState({version:this.props['version']});
-  }
-  /**
-   * 
-   * 
-   * @returns 
-   * @memberof PhoneDirectoryPage
-   */
-  setMaxHeight(){
-    let scrHeight = this.props.appPage.screen.height,
-      multi = ( scrHeight > 700 ) ? .65 : .59;
-    return ( scrHeight * multi );
+    this.setState({
+      phoneDir: phoneNumbers,
+      currentList : phoneNumbers
+    });
   }
   render(){
-    //@todo move all of my styles to a folder and do imports and/or use combines
-    
+    var {currentList} = this.state;
     return (
       <div style={{position:'relative'}}>
        <AppLogoBar hasPaddingTop={false}/>
-        Phone Directory
+        {
+          currentList.map(phone => {
+            return <div>{phone.title} : {phone.number}</div>
+          }) 
+        }
       </div>
     )
   }

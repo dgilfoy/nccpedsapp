@@ -37,7 +37,7 @@ import { withRouter } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import PhoneDirectoryPage from '../pages/PhoneDirectoryPage';
 import BadgeExtrasPage from '../pages/BadgeExtrasPage';
-import OnCallListPage from '../pages/BadgeExtrasPage';
+import OnCallListPage from '../pages/OnCallListPage';
 import ResourcesPage from '../pages/ResourcesPage';
 import PdfViewerPage from '../pages/PdfViewerPage';
 import { Route } from 'react-router-dom';
