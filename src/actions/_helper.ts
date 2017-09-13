@@ -39,3 +39,33 @@ export const nextId = (array) => {
   let nextId = array.length ? getMax(array) + 1 : 1;
   return nextId;
 }
+
+/**
+*  getPDF : void - opens a pdf - in the inAppBrowser for iOS, using FileOpener2 for external applications in android, and in another tab for the web.
+* 
+* @param {any} file 
+* @memberof ResourcesItem
+*/
+export const getPDF = function(file){
+ if (__IS_CORDOVA_BUILD__) {
+   /* eslint-disable */
+   if (cordova.platformId === 'android') {
+     var filetransfer = new FileTransfer();
+     filetransfer.download(
+       cordova.file.applicationDirectory + `www/${file}`,
+       cordova.file.externalApplicationStorageDirectory + file,
+       success => {
+         cordova.plugins.fileOpener2.open(success.toURL(), 'application/pdf');
+       },
+       error => {
+         console.log('error',error)
+       }
+     );
+   } else {
+     (window as any).cordova.InAppBrowser.open(file, '_blank', 'location=no');
+   }
+   /* eslint-disable */
+ } else {
+   (window as any).open(encodeURI(file), '_system');
+ }
+}

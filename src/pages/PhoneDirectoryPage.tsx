@@ -34,9 +34,13 @@
  */ 
 import * as React from 'react';
 //import {Link} from 'react-router-dom';
-import AppLogoBar  from '../components/AppLogoBar';
+import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import phoneNumbers from '../res/data/phoneDirectory';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import {ActionSearch} from 'material-ui/svg-icons';
+import Dialog from 'material-ui/Dialog';
 
 //import ExternalLink from '../components/ExternalLink';
 
@@ -45,26 +49,97 @@ export interface Props {
 }
 export interface State {
   phoneDir,
-  currentList
+  currentList,
+  showSearchBar
 }
 
 export default class PhoneDirectoryPage extends React.Component<Props, State>{
   componentWillMount(){
     this.setState({
       phoneDir: phoneNumbers,
-      currentList : phoneNumbers
+      currentList : phoneNumbers,
+      showSearchBar : false
     });
+  }
+  searchIcon(){
+    const searchIconStyles = {
+      color : '#fff',
+      marginTop : 10,
+      float : 'right',
+      height : "35px", 
+      width : "25px",
+      cursor : "pointer"
+    }
+    return (
+      <ActionSearch 
+        viewBox="5 0 15 32"
+        style={searchIconStyles}
+        onClick={(e)=>this.showSearchBox(e)}
+      />
+    )
+  }
+  showSearchBox(e){
+    this.setState(prevState => ({
+      showSearchBar : true
+    }));
+  }
+  hideSearchBox(e){
+    this.setState(prevState => ({
+      showSearchBar : false
+    }));  
+  }
+  searchDirectory(e){
+    var searchTerm = document.getElementById('searchText')['value'];
+    var results = this.state.phoneDir.filter(function(elem){
+      return elem.title.toLowerCase().indexOf(searchTerm) > -1;
+    });
+    this.setState(prevState => ({
+      currentList : results
+    }));
+    this.hideSearchBox(e);
   }
   render(){
     var {currentList} = this.state;
+    const itemStyle = {
+      margin: '20px auto',
+      width : '20%',
+      minWidth : '170px'
+    }
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.hideSearchBox.bind(this)}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        onClick={this.searchDirectory.bind(this)}
+      />,
+    ];
     return (
       <div style={{position:'relative'}}>
-       <AppLogoBar hasPaddingTop={false}/>
-        {
-          currentList.map(phone => {
-            return <div>{phone.title} : {phone.number}</div>
-          }) 
-        }
+        <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
+        <Dialog 
+          title="Search"
+          actions={actions}
+          modal={true}
+          open={this.state.showSearchBar}>
+          <div>
+            <fieldset>
+              <label>Search the Directory:</label>
+              <input id="searchText" type="text" style={{border:'1px solid'}}/>
+            </fieldset>
+          </div>
+        </Dialog>
+        <div id="phoneDirListWrapper">
+          {currentList.map(phone => {
+              return (<div style={itemStyle} key={phone.id}>
+                <RaisedButton label={phone.title} href={'tel:' +phone.number} fullWidth={true}/>
+              </div>)
+            }) 
+          }
+        </div>
       </div>
     )
   }

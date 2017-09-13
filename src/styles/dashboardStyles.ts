@@ -43,7 +43,7 @@ export const buttonRowSpacing = {
   margin: '16px auto 16px auto',
   padding: '16px auto 16px auto',
   width : '80%',
-  maxWidth: 600
+  maxWidth: 800
 }
 export const smallImage = {
   width : '48%',
@@ -70,5 +70,12 @@ export const buttonsWrapper = {
   padding : '35px 0 0'
 }
 export const buttonItemWrapper = {
-  padding: '10px'
+  padding: '20px',
+  border : '1px solid',
+  backgroundColor: '#fff',
+  width : '25%',
+  minWidth : '200px',
+  textAlign : 'center',
+  marginRight: '10%',
+  marginTop : '20px'
 }

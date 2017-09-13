@@ -34,8 +34,9 @@
  */ 
 import * as React from 'react';
 //import {Link} from 'react-router-dom';
-import AppLogoBar  from '../components/AppLogoBar';
+import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
+import RaisedButton from 'material-ui/RaisedButton';
 //import ExternalLink from '../components/ExternalLink';
 
 const logo = require('../res/images/mpoc.png');
@@ -53,7 +54,7 @@ export default class OnCallListPage extends React.Component<Props, State>{
     
     return (
       <div style={{position:'relative'}}>
-       <AppLogoBar hasPaddingTop={false}/>
+      <AppTitleBar title="One Call Directory"/>
         <div>
           <div><img src={logo} /></div>
           <div>
@@ -64,12 +65,29 @@ export default class OnCallListPage extends React.Component<Props, State>{
             </p>
           </div>
         </div>
-        <div>
-          <h2>Call for Admission/Transport</h2>
+        <div style={{width:'90%',margin:'10px auto'}}>
+          <RaisedButton 
+            label='Call for Admission/Transport'
+            labelColor='#fff' 
+            fullWidth={true} 
+            buttonStyle={{backgroundColor:'#ff3333'}}
+          />  
         </div>
-        <div>
-          <div><h3>NICU On Call</h3></div>
-          <div><h3>PICU On Call</h3></div>
+        <div className="clearFix">
+          <div>
+            <RaisedButton 
+              label='NICU On Call'
+              labelColor='#fff' 
+              buttonStyle={{backgroundColor:'#003399'}}
+            />  
+          </div>
+          <div>
+            <RaisedButton 
+              label='PICU On Call'
+              labelColor='#fff' 
+              buttonStyle={{backgroundColor:'#003399'}}
+            />  
+          </div>
         </div>
         <div>
           <table>

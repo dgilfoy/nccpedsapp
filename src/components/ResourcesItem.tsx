@@ -37,6 +37,7 @@ import { withRouter } from 'react-router-dom';
 import {ResourcesInterface} from '../res/data/resources';
 import {ListItem} from 'material-ui/List';
 import ExternalLink from './ExternalLink';
+import {getPDF} from '../actions/_helper';
 
 export interface Props {
   resources: ResourcesInterface;
@@ -57,35 +58,6 @@ class ResourcesItem extends React.Component<Props, State>{
     super(props);
   }
   /**
-   *  getPDF : void - opens a pdf - in the inAppBrowser for iOS, using FileOpener2 for external applications in android, and in another tab for the web.
-   * 
-   * @param {any} file 
-   * @memberof ResourcesItem
-   */
-  getPDF(file) : void {
-    if (__IS_CORDOVA_BUILD__) {
-      /* eslint-disable */
-      if (cordova.platformId === 'android') {
-        var filetransfer = new FileTransfer();
-        filetransfer.download(
-          cordova.file.applicationDirectory + `www/${file}`,
-          cordova.file.externalApplicationStorageDirectory + file,
-          success => {
-            cordova.plugins.fileOpener2.open(success.toURL(), 'application/pdf');
-          },
-          error => {
-            console.log('error',error)
-          }
-        );
-      } else {
-        (window as any).cordova.InAppBrowser.open(file, '_blank', 'location=no');
-      }
-      /* eslint-disable */
-    } else {
-      (window as any).open(encodeURI(file), '_system');
-    }
-  }
-  /**
    *  inAppLinkClick - returns the pdf or pushes the history if the url contains pdf
    * 
    * @param {string} url 
@@ -94,7 +66,7 @@ class ResourcesItem extends React.Component<Props, State>{
    */
   inAppLinkClick(url, props) : void {
       if(url.includes('pdf')){
-        this.getPDF(url);  
+        getPDF(url);  
       }else{
         props.history.push(url);
       }

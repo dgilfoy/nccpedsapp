@@ -39,12 +39,17 @@ import {NavigationChevronLeft} from 'material-ui/svg-icons';
 
 export interface Props {
   title : string;
+  rightIcon : any;
 }
 
 export interface State {
+  hasRighIcon : boolean
 }
 
 class AppTitleBar extends React.Component<Props, State>{
+  componentWillMount(){
+    this.setState( { hasRighIcon : (this.props.rightIcon === undefined ) ? false : true });
+  }
   /**
    * 
    * 
@@ -90,15 +95,21 @@ class AppTitleBar extends React.Component<Props, State>{
         onClick={()=>this.goBack(this.props['history'])}/>
     );
   }
+  rightIcon(searchNode){
+    return(
+      <div id="AppTitleBarRightIcon">{ this.state.hasRighIcon ? searchNode : '' }</div>
+    )
+  }
   render(){
-    const {title} = this.props;
+    const {title,rightIcon} = this.props;
     return (
       <div>
         <AppBar
-          style={{position:'fixed'}}
           title={this.setTitle(title)}
           iconElementLeft={this.backIcon()}
-          onTitleTouchTap={()=>this.goBack(this.props['history'])}/>
+          onTitleTouchTap={()=>this.goBack(this.props['history'])}
+          iconElementRight={this.rightIcon(rightIcon)}
+        />
       </div>
     );
   }
