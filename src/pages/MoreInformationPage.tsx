@@ -1,9 +1,9 @@
 /**
- * @file ResourcesList.tsx
- * 
+ * @file BadgeExtrasPage.tsx
+ * File in charge of Displaying the badge extras
  
- * Name: ResourcesList.tsx
- * 
+ * Name: BadgeExtrasPage.ts
+ * Purpose of this file is to provide the view for the main page of the app -  or it's dashboard
  *
  * Modified by Daniel Gilfoy <daniel.gilfoy@tee2.org> on 7/25/2017.
  *
@@ -33,31 +33,29 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
-import {ResourcesInterface} from '../res/data/resources';
-import ResourcesItem from './ResourcesItem';
-import {List} from 'material-ui/List';
+//import {Link} from 'react-router-dom';
+import AppLogoBar  from '../components/AppLogoBar';
+import {AppPageInterface} from '../components/AppTheme';
+
+//import ExternalLink from '../components/ExternalLink';
 
 export interface Props {
-  resources: ResourcesInterface[];
+  appPage: AppPageInterface;
 }
-
 export interface State {}
 
-export default class ResourcessList extends React.Component<Props, State>{
-  constructor(props){
-    super(props);
-
+export default class BadgeExtrasPage extends React.Component<Props, State>{
+  componentWillMount(){
+    
   }
   render(){
-    const {resources} = this.props;
+    //@todo move all of my styles to a folder and do imports and/or use combines
+    
     return (
-      <div style={{backgroundColor:"#fff"}}>
-        <List>
-          {resources.map(resource => {
-            return <ResourcesItem key={resource.id} resources={resource} />
-          })}
-        </List>
+      <div style={{position:'relative'}}>
+       <AppLogoBar hasPaddingTop={false}/>
+        More Information
       </div>
-    );
+    )
   }
 }

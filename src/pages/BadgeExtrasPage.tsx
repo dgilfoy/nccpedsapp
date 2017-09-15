@@ -46,7 +46,7 @@ export interface State {}
 
 export default class BadgeExtrasPage extends React.Component<Props, State>{
   componentWillMount(){
-    this.setState({version:this.props['version']});
+    
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines

@@ -51,7 +51,10 @@ export default class OnCallListPage extends React.Component<Props, State>{
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
-    
+    const tButtonStyles ={
+      width : '100%',
+      padding : '5px'
+    }
     return (
       <div style={{position:'relative'}}>
       <AppTitleBar title="One Call Directory"/>
@@ -74,59 +77,154 @@ export default class OnCallListPage extends React.Component<Props, State>{
           />  
         </div>
         <div className="clearFix">
-          <div>
+          <div style={{width:'45%', float: 'left'}}>
             <RaisedButton 
               label='NICU On Call'
               labelColor='#fff' 
-              buttonStyle={{backgroundColor:'#003399'}}
+              buttonStyle={{backgroundColor:'#003399', float:'right'}}
             />  
           </div>
-          <div>
+          <div style={{width:'45%', float: 'left'}}>
             <RaisedButton 
               label='PICU On Call'
               labelColor='#fff' 
-              buttonStyle={{backgroundColor:'#003399'}}
+              buttonStyle={{backgroundColor:'#003399', float:'left'}}
             />  
           </div>
         </div>
         <div>
-          <table>
+          <table style={{width:'90%', margin:'10px auto'}}>
             <tbody>
               <tr>
-                <td>Adol</td>
-                <td>Allergy</td>
-                <td>Cards</td>
+                <td>
+                  <RaisedButton 
+                    style={tButtonStyles}
+                    label='Adol'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Allergy'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Cards'
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Devo</td>
-                <td>Endo</td>
-                <td>ENT</td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Devo'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Endo'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='ENT'
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Genetics</td>
-                <td>GI</td>
-                <td>Heme/Onc</td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Genetics'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='GI'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Heme/Onc'
+                  />
+                </td>
               </tr>
               <tr>
-                <td>ID</td>
-                <td>Nephro</td>
-                <td>Neuro</td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='ID'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Nephro'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Neuro'
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Ophtho</td>
-                <td>Ortho</td>
-                <td>Pulm</td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Ophtho'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Ortho'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Pulm'
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Rheum</td>
-                <td>Surgery</td>
-                <td>Urology</td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Rheum'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Surgery'
+                  />
+                </td>
+                <td>
+                  <RaisedButton
+                    style={tButtonStyles} 
+                    label='Urology'
+                  />
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div>
-          <h4>More Information</h4>
+        <div style={{width: '40%', margin:'0 auto'}}>
+          <RaisedButton
+            label='More Information'
+              labelColor='#fff' 
+              labelStyle = {{textAlign:'center'}}
+              buttonStyle={{backgroundColor:'#003399'}}
+          />
         </div>
       </div>
     )

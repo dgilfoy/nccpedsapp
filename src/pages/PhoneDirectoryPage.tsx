@@ -40,7 +40,10 @@ import phoneNumbers from '../res/data/phoneDirectory';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import {ActionSearch} from 'material-ui/svg-icons';
+import {MapsLocalPhone} from 'material-ui/svg-icons';
 import Dialog from 'material-ui/Dialog';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
 
 //import ExternalLink from '../components/ExternalLink';
 
@@ -103,7 +106,7 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
     const itemStyle = {
       margin: '20px auto',
       width : '20%',
-      minWidth : '170px'
+      minWidth : '200px'
     }
     const actions = [
       <FlatButton
@@ -117,25 +120,35 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
         onClick={this.searchDirectory.bind(this)}
       />,
     ];
+    const customContentStyle = {
+      width: '100%',
+      maxWidth: 'none',
+    };
     return (
       <div style={{position:'relative'}}>
         <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
         <Dialog 
-          title="Search"
+          actionsContainerStyle={{paddingTop:0}}
+          contentStyle={customContentStyle}
           actions={actions}
           modal={true}
           open={this.state.showSearchBar}>
-          <div>
-            <fieldset>
-              <label>Search the Directory:</label>
-              <input id="searchText" type="text" style={{border:'1px solid'}}/>
-            </fieldset>
-          </div>
+          <Card>
+          <CardHeader
+            title="Search The Directory"
+          />
+          <CardText>
+          <TextField
+            id="searchText"
+            hintText="Type a Name to search a number"
+          />
+          </CardText>
+        </Card>
         </Dialog>
         <div id="phoneDirListWrapper">
           {currentList.map(phone => {
               return (<div style={itemStyle} key={phone.id}>
-                <RaisedButton label={phone.title} href={'tel:' +phone.number} fullWidth={true}/>
+                <RaisedButton labelPosition="before" icon={<MapsLocalPhone style={{float:'right',marginTop:'5px'}}/>} label={phone.title} href={'tel:' +phone.number} fullWidth={true}/>
               </div>)
             }) 
           }

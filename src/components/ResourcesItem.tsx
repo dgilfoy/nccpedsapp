@@ -38,6 +38,7 @@ import {ResourcesInterface} from '../res/data/resources';
 import {ListItem} from 'material-ui/List';
 import ExternalLink from './ExternalLink';
 import {getPDF} from '../actions/_helper';
+import {HardwareKeyboardArrowRight} from 'material-ui/svg-icons';
 
 export interface Props {
   resources: ResourcesInterface;
@@ -94,7 +95,11 @@ class ResourcesItem extends React.Component<Props, State>{
    */
   listItem(resources) : JSX.Element {
     return (
-      <ListItem primaryText={resources.title} style={listStyle} onTouchTap={()=>this.inAppLinkClick(resources.link,this.props)}/>  
+      <ListItem 
+        rightIcon={<HardwareKeyboardArrowRight/>}
+        primaryText={resources.title} style={listStyle} 
+        onTouchTap={()=>this.inAppLinkClick(resources.link,this.props)}
+      />  
     )
   }
   /**

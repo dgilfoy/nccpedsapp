@@ -38,6 +38,7 @@ import HomePage from '../pages/HomePage';
 import PhoneDirectoryPage from '../pages/PhoneDirectoryPage';
 import BadgeExtrasPage from '../pages/BadgeExtrasPage';
 import OnCallListPage from '../pages/OnCallListPage';
+import MoreInformationPage from '../pages/MoreInformationPage';
 import ResourcesPage from '../pages/ResourcesPage';
 import PdfViewerPage from '../pages/PdfViewerPage';
 import { Route } from 'react-router-dom';
@@ -164,12 +165,12 @@ class App extends React.Component<Props, State>{
    * @memberof App
    */
   render(){
-    //<Route exact path="/pdf/:file" render={this.renderRouteComponent(PdfViewerPage)} />
     return <MuiThemeProvider muiTheme={muiTheme}>
     <div>
       <div style={{padding: '0px'}}>
         <Route exact path="/" render={this.renderRouteComponent(HomePage)} />
         <Route path="/directory" render={this.renderRouteComponent(PhoneDirectoryPage)} />
+        <Route path="/more-info" render={this.renderRouteComponent(MoreInformationPage)} />
         <Route path="/oncall" render={this.renderRouteComponent(OnCallListPage)} />
         <Route path="/badge-extras" render={this.renderRouteComponent(BadgeExtrasPage)} />
         <Route path="/resources" render={this.renderRouteComponent(ResourcesPage)} />
