@@ -36,6 +36,7 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import AppLogoBar  from '../components/AppLogoBar';
 import {AppPageInterface} from '../components/AppTheme';
+//import BottomNavigationComp from '../components/BottomNavigation';
 import {
   buttonRowSpacing,
   buttonsWrapper,
@@ -95,24 +96,9 @@ export default class DashboardPage extends React.Component<Props, State>{
     }
     const buttonItemWrapper = this.buttonWrapperStyle();
     return (
-      <div style={{position:'relative', background: 'url(' + logoLarge + ') center no-repeat'}}>
+      <div style={{position:'relative', background: 'url(' + logoLarge + ') center no-repeat', height:this.props.appPage.screen.height-96}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
-          <div style={buttonRowSpacing} className="clearfix rowWrapper">
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <ExternalLink 
-                absolutePath="https://calendar.google.com/calendar/embed?src=fuvtodunsk7fvni5rkpsp9cbmk@group.calendar.google.com" 
-                target="_system">
-                Acad Calendar
-              </ExternalLink>
-            </div>
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <ExternalLink 
-                absolutePath="http://www.relayhealth.com/RelayHealth" 
-                target="_system">Relay Health
-              </ExternalLink>
-            </div>
-          </div>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">
             <div style={{...buttonItemWrapper,...smallImageLeft}}>
               <Link to="/resources">CPG/Algorithms</Link>
@@ -127,11 +113,6 @@ export default class DashboardPage extends React.Component<Props, State>{
                 absolutePath="tel:+3016767337">Admin Phone
               </ExternalLink>
             </div>
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <Link to="/directory">Phone Directory</Link>
-            </div>
-          </div>
-          <div style={buttonRowSpacing} className="clearfix rowWrapper">
             <div style={{...buttonItemWrapper,...smallImageLeft}}>
               <Link to="/oncall">On Call</Link>
             </div>

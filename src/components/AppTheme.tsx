@@ -48,6 +48,7 @@ import BasicPage from '../containers/BasicPage';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
+import BottomNavigationComp from '../components/BottomNavigation';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -189,9 +190,12 @@ class App extends React.Component<Props, State>{
 
     return () => {  
       return (
-        <BasicPage>
-          <Component appPage={this.getAppPageObject()} />
-        </BasicPage>
+        <div>
+          <BasicPage>
+            <Component appPage={this.getAppPageObject()} />
+          </BasicPage>
+          <BottomNavigationComp screen={this.state.screen} />
+        </div>
       );
     };
   }
@@ -206,6 +210,7 @@ class App extends React.Component<Props, State>{
               <TextField
                 id="passPhrase"
                 hintText="Enter the passphrase to continue"
+                errorText="This field is required."
                 value={this.state.inputValue}
                 onChange={this.updateInputValue.bind(this)}
               />

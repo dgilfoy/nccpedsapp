@@ -66,8 +66,7 @@ export const chiefImgWrapper = {
 }
 export const buttonsWrapper = {
   width : '100%',
-  float: 'left',
-  padding : '35px 0 0'
+  float: 'left'
 }
 export const buttonItemWrapper = {
   padding: '20px',

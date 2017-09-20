@@ -71,6 +71,7 @@ export default class SplashPage extends React.Component<Props, State>{
               <TextField
                 id="passPhrase"
                 hintText="Enter the passphrase to continue"
+                errorText="This field is required."
                 value={this.state.inputValue}
                 onChange={this.updateInputValue.bind(this)}
               />

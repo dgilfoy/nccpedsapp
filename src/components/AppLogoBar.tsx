@@ -44,8 +44,7 @@ export default class AppLogoBar extends React.Component<Props, State>{
   render(){
     const logoHeaderWrapper = {
       width:'100%',
-      backgroundColor: '#fff',
-      padding: '50px 0 0'
+      backgroundColor: '#fff'
     }
     const logoHeaderWrapperNoTopPadding = {
       width:'100%',
@@ -58,15 +57,14 @@ export default class AppLogoBar extends React.Component<Props, State>{
     }
     const logoWrapperPaddedTop = {
       maxWidth : 245,
-      margin : '0 auto',
-      paddingTop: 10  
+      margin : '0 auto'
     }
     const {hasPaddingTop} = this.props;
     return (
       <div>
          <div style={(hasPaddingTop) ? logoHeaderWrapper : logoHeaderWrapperNoTopPadding}>
           <div style={(hasPaddingTop) ? logoWrapper : logoWrapperPaddedTop}>
-            <h1>NCCPedsApp</h1>
+            <h1 style={{margin:10}}>NCCPedsApp</h1>
           </div>
         </div>
       </div>
