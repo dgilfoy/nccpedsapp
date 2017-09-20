@@ -33,25 +33,52 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 export interface Props {
   
 }
 
 export interface State {
-  
+  inputValue : any  
 }
 
 export default class SplashPage extends React.Component<Props, State>{
   
   componentWillMount(){
+    this.setState({inputValue:''});
+  }
+  submitPass(){
+    // set the datastore "is authenticated" to be true
     
   }
-
+  updateInputValue(e){
+    e.persist();
+    this.setState(prevState => ({
+      inputValue : e.target.value
+    }));
+  }
   render(){
     return (
       <div>
-        <h1>You must log in to continue!</h1>
+        <Card>
+            <CardHeader
+              title="Log In"
+            />
+            <CardText>
+              <TextField
+                id="passPhrase"
+                hintText="Enter the passphrase to continue"
+                value={this.state.inputValue}
+                onChange={this.updateInputValue.bind(this)}
+              />
+            </CardText>
+            <CardActions>
+              <RaisedButton label="Submit" onClick={()=>{this.submitPass()}} />
+            </CardActions>
+          </Card>
       </div>
     )
   }

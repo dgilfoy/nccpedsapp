@@ -35,7 +35,6 @@
 import * as React from 'react';
 import {AppPageInterface} from '../components/AppTheme';
 import DashboardPage from '../containers/DashboardPage';
-import SplashPage from './SplashPage';
 
 export interface Props {
   appPage: AppPageInterface;
@@ -48,10 +47,8 @@ export interface State {
 }
 
 export default class Home extends React.Component<Props, State>{
-  private isAuthenticated : Boolean;
   
   componentWillMount(){
-    this.isAuthenticated = true;
     this.props.setPageTitle("Home");
   }
 
@@ -59,7 +56,7 @@ export default class Home extends React.Component<Props, State>{
     const {appPage} = this.props;
     return (
       <div>
-        {this.isAuthenticated ? <DashboardPage appPage={appPage}/> : <SplashPage/>}
+        <DashboardPage appPage={appPage}/>
       </div>
     )
   }

@@ -68,11 +68,14 @@ const resources = (state = defaultResources, action) => {
 const resourcesIds = (state = defaultResourcesIds, action) => {
   return state;
 }
-
+const isAuthenticated = ( state = true, action) => {
+  return state;
+}
 const reducer = combineReducers({
   view,
   resources,
-  resourcesIds
+  resourcesIds,
+  isAuthenticated
 });
 
 export default reducer;

@@ -34,8 +34,9 @@
  */ 
 import * as React from 'react';
 //import {Link} from 'react-router-dom';
-import AppLogoBar  from '../components/AppLogoBar';
+import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
+import RaisedButton from 'material-ui/RaisedButton';
 
 //import ExternalLink from '../components/ExternalLink';
 
@@ -53,8 +54,15 @@ export default class BadgeExtrasPage extends React.Component<Props, State>{
     
     return (
       <div style={{position:'relative'}}>
-       <AppLogoBar hasPaddingTop={false}/>
-        More Information
+      <AppTitleBar title="More Information"/>
+       <div style={{padding:'10px'}}>
+          <h2>How to use the One Call Page</h2>
+          <p>The One Call page will dial the on-call physician directly for each service. Pediatric Surgery, urology, and  allergy dial the pager access number and pin; 
+            you will need to enter your callback number when prompted.</p>
+          <h3>Operator Assited Paging</h3>
+          <p>You may also access the live operator to page any military pediatric service by calling (or pressing) the number below:</p>
+          <RaisedButton label="1-866-666-2362" href="tel:1-866-666-2362"/>
+        </div>
       </div>
     )
   }

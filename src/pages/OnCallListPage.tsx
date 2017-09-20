@@ -35,6 +35,7 @@
 import * as React from 'react';
 //import {Link} from 'react-router-dom';
 import AppTitleBar  from '../components/AppTitleBar';
+import { withRouter } from 'react-router-dom';
 import {AppPageInterface} from '../components/AppTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 //import ExternalLink from '../components/ExternalLink';
@@ -43,10 +44,11 @@ const logo = require('../res/images/mpoc.png');
 
 export interface Props {
   appPage: AppPageInterface;
+  history: any;
 }
 export interface State {}
 
-export default class OnCallListPage extends React.Component<Props, State>{
+class OnCallListPage extends React.Component<Props, State>{
   componentWillMount(){  
   }
   render(){
@@ -58,11 +60,11 @@ export default class OnCallListPage extends React.Component<Props, State>{
     return (
       <div style={{position:'relative'}}>
       <AppTitleBar title="One Call Directory"/>
-        <div>
-          <div><img src={logo} /></div>
-          <div>
-            <h1>Military Pediatrics OneCall</h1>
-            <p>
+        <div style={{padding:'10px'}}>
+          <div style={{width:'20%',float:'left'}}><img style={{width:'90%'}} src={logo} /></div>
+          <div style={{width:'73%', float:'left', backgroundColor:'#003399', color:'#fff', padding:'10px', marginBottom:'10px'}}>
+            <h3 style={{margin:'0 auto'}}>Military Pediatrics OneCall</h3>
+            <p style={{margin:'3px auto'}}>
               Comprehensive Inpatient &amp; Outpatient Pediatric Subspecialty Care &amp; Consultation 
               for TRICARE in the MidAtlantic Region &amp; WorldWide
             </p>
@@ -73,21 +75,24 @@ export default class OnCallListPage extends React.Component<Props, State>{
             label='Call for Admission/Transport'
             labelColor='#fff' 
             fullWidth={true} 
+            href="tel:" 
             buttonStyle={{backgroundColor:'#ff3333'}}
           />  
         </div>
-        <div className="clearFix">
-          <div style={{width:'45%', float: 'left'}}>
+        <div className="clearfix">
+          <div style={{width:'45%', float: 'left', marginLeft:'10%'}}>
             <RaisedButton 
               label='NICU On Call'
-              labelColor='#fff' 
+              labelColor='#fff'
+              href="tel:" 
               buttonStyle={{backgroundColor:'#003399', float:'right'}}
             />  
           </div>
           <div style={{width:'45%', float: 'left'}}>
             <RaisedButton 
               label='PICU On Call'
-              labelColor='#fff' 
+              labelColor='#fff'
+              href="tel:301-642-7667"
               buttonStyle={{backgroundColor:'#003399', float:'left'}}
             />  
           </div>
@@ -100,18 +105,21 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton 
                     style={tButtonStyles}
                     label='Adol'
+                    href="tel:301-318-6999" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Allergy'
+                    href="tel:" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Cards'
+                    href="tel:301-385-9330" 
                   />
                 </td>
               </tr>
@@ -120,18 +128,21 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Devo'
+                    href="tel:301-646-8276" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Endo'
+                    href="tel:202-713-3321" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='ENT'
+                    href="tel:" 
                   />
                 </td>
               </tr>
@@ -140,18 +151,21 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Genetics'
+                    href="tel:301-646-9017" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='GI'
+                    href="tel:301-646-8201" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Heme/Onc'
+                    href="tel:301-412-4549" 
                   />
                 </td>
               </tr>
@@ -160,18 +174,21 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton
                     style={tButtonStyles} 
                     label='ID'
+                    href="tel:301-648-0545" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Nephro'
+                    href="tel:6154363962" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Neuro'
+                    href="tel:301-412-7840" 
                   />
                 </td>
               </tr>
@@ -180,18 +197,21 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Ophtho'
+                    href="tel:" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Ortho'
+                    href="tel:" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Pulm'
+                    href="tel:301-648-0144" 
                   />
                 </td>
               </tr>
@@ -200,33 +220,38 @@ export default class OnCallListPage extends React.Component<Props, State>{
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Rheum'
+                    href="tel:301-648-0641" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Surgery'
+                    href="tel:" 
                   />
                 </td>
                 <td>
                   <RaisedButton
                     style={tButtonStyles} 
                     label='Urology'
+                    href="tel:" 
                   />
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div style={{width: '40%', margin:'0 auto'}}>
+        <div style={{width: '45%', margin:'0 auto'}}>
           <RaisedButton
             label='More Information'
               labelColor='#fff' 
               labelStyle = {{textAlign:'center'}}
               buttonStyle={{backgroundColor:'#003399'}}
+              onClick={()=>{ this.props.history.push('/more-info') }}
           />
         </div>
       </div>
     )
   }
 }
+export default withRouter(OnCallListPage);

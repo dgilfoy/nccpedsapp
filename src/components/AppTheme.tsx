@@ -45,6 +45,9 @@ import { Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import BasicPage from '../containers/BasicPage';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -64,18 +67,19 @@ export interface AppPageInterface {
   screen:{width: number, height: number}
 }
 export interface Props {
-  params
+  params,
+  isAuthenticated
 }
 
 export interface State {
-  screen:{width: number, height: number}
+  screen:{width: number, height: number},
+  inputValue : any,
+  isAuthenticated : boolean  
 }
+
 class App extends React.Component<Props, State>{
   constructor(props){
     super(props);
-    this.state = {
-      screen: this.getScreenDimensions(),
-    }
   }
   /**
    * 
@@ -87,7 +91,21 @@ class App extends React.Component<Props, State>{
       screen: this.state.screen
     }
   }
+  componentWillMount(){
+    let storage = window.localStorage,
+      authToken =  storage.getItem('isAuthenticated'),
+        isAuthBool = false;
+      console.log(authToken);
+      if(authToken === 'true'){
+        isAuthBool = true;
+      }
 
+    this.setState({
+      screen: this.getScreenDimensions(),
+      inputValue : '',
+      isAuthenticated : isAuthBool
+    });
+  }
   componentDidMount(){
     this.handlePageResize();
   }
@@ -143,6 +161,25 @@ class App extends React.Component<Props, State>{
       }
     }
   }
+  submitPass(e){
+    // set the datastore "is authenticated" to be true if the passPhrase is correct
+    if(this.state.inputValue === '1234'){
+
+      let storage = window.localStorage;
+      
+      storage.setItem('isAuthenticated', 'true');
+        
+      this.setState(prevState => ({
+        isAuthenticated : true
+      }));
+    }
+  }
+  updateInputValue(e){
+    e.persist();
+    this.setState(prevState => ({
+      inputValue : e.target.value
+    }));
+  }
   /**
    *  renders the componenent for the app
    * 
@@ -158,16 +195,31 @@ class App extends React.Component<Props, State>{
       );
     };
   }
-  /**
-   * Routing for the app
-   * 
-   * @returns 
-   * @memberof App
-   */
-  render(){
-    return <MuiThemeProvider muiTheme={muiTheme}>
-    <div>
-      <div style={{padding: '0px'}}>
+  splashScreen = () => {
+    return (
+      <div>
+        <Card>
+            <CardHeader
+              title="Log In"
+            />
+            <CardText>
+              <TextField
+                id="passPhrase"
+                hintText="Enter the passphrase to continue"
+                value={this.state.inputValue}
+                onChange={this.updateInputValue.bind(this)}
+              />
+            </CardText>
+            <CardActions>
+              <RaisedButton label="Submit" onClick={this.submitPass.bind(this)} />
+            </CardActions>
+          </Card>
+      </div>
+    )
+  }
+  setOtherRoutes(){
+    return (
+      <div>
         <Route exact path="/" render={this.renderRouteComponent(HomePage)} />
         <Route path="/directory" render={this.renderRouteComponent(PhoneDirectoryPage)} />
         <Route path="/more-info" render={this.renderRouteComponent(MoreInformationPage)} />
@@ -176,7 +228,17 @@ class App extends React.Component<Props, State>{
         <Route path="/resources" render={this.renderRouteComponent(ResourcesPage)} />
         <Route exact path="/pdf/:file" render={this.renderRouteComponent(PdfViewerPage)} />
       </div>
-    </div>
+    )
+  }
+  /**
+   * Routing for the app
+   * 
+   * @returns 
+   * @memberof App
+   */
+  render(){
+    return <MuiThemeProvider muiTheme={muiTheme}>  
+      {this.state.isAuthenticated ? this.setOtherRoutes() : <Route path="/" render={this.splashScreen} />}
     </MuiThemeProvider>;
  
   }
