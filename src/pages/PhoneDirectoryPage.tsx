@@ -38,11 +38,11 @@ import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import phoneNumbers from '../res/data/phoneDirectory';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+//import FlatButton from 'material-ui/FlatButton';
 import {ActionSearch} from 'material-ui/svg-icons';
 import {MapsLocalPhone} from 'material-ui/svg-icons';
-import Dialog from 'material-ui/Dialog';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+//import Dialog from 'material-ui/Dialog';
+//import {Card, CardHeader, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
 //import ExternalLink from '../components/ExternalLink';
@@ -91,15 +91,25 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
       showSearchBar : false
     }));  
   }
-  searchDirectory(e){
-    var searchTerm = document.getElementById('searchText')['value'];
-    var results = this.state.phoneDir.filter(function(elem){
-      return elem.title.toLowerCase().indexOf(searchTerm) > -1;
+  
+  liveSearch(e){
+    let val = e.target['value'],
+      results = this.state.phoneDir.filter(function(elem){
+      return elem.title.toLowerCase().indexOf(val) > -1;
     });
     this.setState(prevState => ({
       currentList : results
     }));
-    this.hideSearchBox(e);
+  }
+  searchText(){
+    return (
+      <div style={{width:'20%', margin:'0 auto', minWidth:'300px'}}>
+        <ActionSearch 
+          viewBox="5 0 15 32"
+        />
+        <TextField id="searchText" hintText="Search the Directory" onChange={this.liveSearch.bind(this)}/>
+      </div>
+    )
   }
   render(){
     var {currentList} = this.state;
@@ -108,43 +118,11 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
       width : '20%',
       minWidth : '200px'
     }
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.hideSearchBox.bind(this)}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        onClick={this.searchDirectory.bind(this)}
-      />,
-    ];
-    const customContentStyle = {
-      width: '100%',
-      maxWidth: 'none',
-    };
     return (
       <div style={{position:'relative'}}>
         <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
-        <Dialog 
-          actionsContainerStyle={{paddingTop:0}}
-          contentStyle={customContentStyle}
-          actions={actions}
-          modal={true}
-          open={this.state.showSearchBar}>
-          <Card>
-          <CardHeader
-            title="Search The Directory"
-          />
-          <CardText>
-          <TextField
-            id="searchText"
-            hintText="Type a Name to search a number"
-          />
-          </CardText>
-        </Card>
-        </Dialog>
+        { this.state.showSearchBar ? this.searchText() : ''}
+        
         <div id="phoneDirListWrapper">
           {currentList.map(phone => {
               return (<div style={itemStyle} key={phone.id}>

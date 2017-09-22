@@ -96,7 +96,6 @@ class App extends React.Component<Props, State>{
     let storage = window.localStorage,
       authToken =  storage.getItem('isAuthenticated'),
         isAuthBool = false;
-      console.log(authToken);
       if(authToken === 'true'){
         isAuthBool = true;
       }
