@@ -49,6 +49,11 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
 import BottomNavigationComp from '../components/BottomNavigation';
+import * as CryptoJS from "crypto-js";
+import {passPhrase, passKey} from '../res/data/secPassPhrase';
+import {ActionInfoOutline} from 'material-ui/svg-icons';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -75,7 +80,8 @@ export interface Props {
 export interface State {
   screen:{width: number, height: number},
   inputValue : any,
-  isAuthenticated : boolean  
+  isAuthenticated : boolean,
+  popoverOpen : boolean
 }
 
 class App extends React.Component<Props, State>{
@@ -103,7 +109,8 @@ class App extends React.Component<Props, State>{
     this.setState({
       screen: this.getScreenDimensions(),
       inputValue : '',
-      isAuthenticated : isAuthBool
+      isAuthenticated : isAuthBool,
+      popoverOpen : false
     });
   }
   componentDidMount(){
@@ -161,9 +168,10 @@ class App extends React.Component<Props, State>{
       }
     }
   }
-  submitPass(e){
+  submitPass( e ) {
     // set the datastore "is authenticated" to be true if the passPhrase is correct
-    if(this.state.inputValue === '1234'){
+    let uepp = CryptoJS.AES.decrypt(passPhrase,passKey).toString(CryptoJS.enc.Utf8);
+    if(this.state.inputValue == uepp ){
 
       let storage = window.localStorage;
       
@@ -198,25 +206,73 @@ class App extends React.Component<Props, State>{
       );
     };
   }
+  handleRequestClose(event){
+    event.persist();
+    this.setState(prevState => ({
+      popoverOpen : false
+    }));
+  }
+  handleTouchTap = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState(prevState => ({
+      popoverOpen: true
+    }));
+  };
   splashScreen = () => {
+    const ssCardStyles = {
+      height : this.state.screen.height,
+      backgroundColor: '#043365',
+      background: 'linear-gradient(to bottom, #043365 0%,#094A8F 45%,#0E5DB5 60%,#4390DE 100%)',
+      paddingTop: this.state.screen.height/5
+    }
+    const actions = [
+      <FlatButton
+        label="Ok"
+        primary={true}
+        onClick={this.handleRequestClose.bind(this)}
+      />
+    ];
     return (
       <div>
-        <Card>
+        <Card style={ssCardStyles}>
             <CardHeader
-              title="Log In"
+              style={{width:'85%',margin:'0 auto',display:'block',textAlign:'center',maxWidth:'800px'}}
+              titleStyle={{textAlign:'center',fontSize:'25px',display:'block',width:'100%'}}
+              titleColor='#fff'
+              textStyle={{width:'98%'}}
+              title="MilitaryPedsApp"
             />
             <CardText>
-              <TextField
-                id="passPhrase"
-                hintText="Enter the passphrase to continue"
-                errorText="This field is required."
-                value={this.state.inputValue}
-                onChange={this.updateInputValue.bind(this)}
-              />
+              <div style={{width:'85%',margin:'0 auto',maxWidth:'800px'}}>
+                <TextField
+                  id="passPhrase"
+                  hintText="Enter the passphrase to continue"
+                  value={this.state.inputValue}
+                  onChange={this.updateInputValue.bind(this)}
+                  inputStyle={{backgroundColor:'#fff', border:'1px solid red'}}
+                  fullWidth={true}
+                />
+              <p style={{color:'#fff', textAlign:'center'}}>
+                Pass Phrase <ActionInfoOutline style={{color:'#fff', marginLeft:'20px',marginRight:'5px'}} onClick={this.handleTouchTap.bind(this)}/>  
+                <span style={{fontSize:'10px',color:'#fff'}}> Where do I get a pass phrase?</span> 
+              </p>
+              <CardActions style={{width:'40%',margin:'0 auto', maxWidth:'200px'}}>
+                <RaisedButton 
+                  style={{width:'90%',margin:'0 auto', padding:'10px 0', border:'1px solid red'}}
+                  label="Submit" 
+                  onClick={this.submitPass.bind(this)} />
+              </CardActions>
+            </div>
             </CardText>
-            <CardActions>
-              <RaisedButton label="Submit" onClick={this.submitPass.bind(this)} />
-            </CardActions>
+            <Dialog
+              open={this.state.popoverOpen}
+              onRequestClose={this.handleRequestClose.bind(this)}
+              actions={actions}
+            >
+              <p>Info on where to get a pass phrase here.</p> 
+            </Dialog>
           </Card>
       </div>
     )

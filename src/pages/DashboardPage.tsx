@@ -33,29 +33,37 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
-import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AppLogoBar  from '../components/AppLogoBar';
 import {AppPageInterface} from '../components/AppTheme';
-//import BottomNavigationComp from '../components/BottomNavigation';
 import {
   buttonRowSpacing,
   buttonsWrapper,
   versionStyle,
-  smallImageLeft
+  smallImageLeft,
+  smallImageRight
 } from '../styles/dashboardStyles';
-import ExternalLink from '../components/ExternalLink';
 import {getPDF} from '../actions/_helper';
+import RaisedButton from 'material-ui/RaisedButton';
+import {MapsLocalPhone} from 'material-ui/svg-icons';
+import {ActionVerifiedUser} from 'material-ui/svg-icons';
 
 const logoLarge = require('../res/images/logoLarge.png');
 
 export interface Props {
   appPage: AppPageInterface;
 }
-export interface State {}
+export interface State {
+  screen:{width: number, height: number}
+}
+const cpgSVGIcon = require('../res/images/CPG_white.svg');
 
-export default class DashboardPage extends React.Component<Props, State>{
+class DashboardPage extends React.Component<Props, State>{
   componentWillMount(){
-    
+    this.setState({screen:{
+      width : this.props.appPage.screen.width,
+      height : this.props.appPage.screen.height
+    }});
   }
   /**
    * 
@@ -71,23 +79,49 @@ export default class DashboardPage extends React.Component<Props, State>{
   buttonWrapperStyle(){
     let screenWidth = this.props.appPage.screen.width,
       style = {
-        padding: '20px',
-        border : '1px solid',
-        backgroundColor: '#fff',
         textAlign : 'center',
-        marginRight: '10%',
         marginTop : '20px', 
-        width : '100px'
+        width : '100px',
+        minHeight : '100px'
       },
     containerWidth = ( screenWidth > 800) ? 640 : screenWidth*.8;
     if( containerWidth < 420 ){
-      let fullWidth = .8 * containerWidth;
+      let fullWidth = .49 * containerWidth;
       style.width = fullWidth + 'px';
     }else{
-      let notFullWidth = .3 * containerWidth;
+      let notFullWidth = .31 * containerWidth;
       style.width = notFullWidth + 'px';
     }
     return style;
+  }
+  dbGoTo(url,external=false){
+    if( external ){
+      console.log(url);
+      return window.open(url,'_system')
+    }else{
+      this.props['history'].push(url);
+    }
+  }
+  badgeExtrasIcon(){
+    return(
+      <div>
+        <ActionVerifiedUser style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-20px',marginLeft:'-15px'}}/><br/>
+      </div>
+    )
+  }
+  cpgAlgIcon(){
+    return(
+      <div style={{marginLeft:'-10px'}}>
+        <img style={{height:'40px',width:'40px', margin:'0 auto 15px'}} src={cpgSVGIcon} /><br/>
+      </div>
+    )
+  }
+  phoneIcon(){
+    return (
+      <div>
+        <MapsLocalPhone style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-20px',marginLeft:'-15px'}}/><br/>
+      </div>
+    )
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
@@ -95,26 +129,70 @@ export default class DashboardPage extends React.Component<Props, State>{
       minHeight: this.setMaxHeight()
     }
     const buttonItemWrapper = this.buttonWrapperStyle();
+    const raisedButtonStyles = {
+      padding:'15px', 
+      height:buttonItemWrapper.width, 
+      backgroundColor:'#043365',
+      background: 'linear-gradient(to bottom, #0062CF 0%,#094A8F 45%,#0E5DB5 60%,#003168 100%)',
+      border : '3px groove rgba(161, 15, 30,0.75)',
+      lineHeight : '15px'
+    }
+    const buttonLabelStyles = {
+      textAlign:'center',
+      lineHeight: '15px'
+    }
     return (
       <div style={{position:'relative', background: 'url(' + logoLarge + ') center no-repeat', height:this.props.appPage.screen.height-96}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
-          <div style={buttonRowSpacing} className="clearfix rowWrapper">
+        <div style={buttonRowSpacing} className="clearfix rowWrapper">
             <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <Link to="/resources">CPG/Algorithms</Link>
+              <RaisedButton
+                icon={this.phoneIcon()} 
+                label="Admin Phone" 
+                onClick={()=>{this.dbGoTo('tel:+3016767337',true)} }
+                fullWidth={true}
+                buttonStyle={raisedButtonStyles}
+                labelColor={'#fff'}
+                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
+              />
             </div>
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <div style={{cursor:'pointer'}} onTouchTap={()=>getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))}>Badge Extras</div>
+            <div style={{...buttonItemWrapper,...smallImageRight}}>
+            <RaisedButton 
+                icon={this.phoneIcon()} 
+                label="One Call" 
+                onClick={()=>{this.dbGoTo('/oncall',false)} }
+                fullWidth={true}
+                buttonStyle={raisedButtonStyles}
+                labelColor={'#fff'}
+                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
+              />
             </div>
           </div>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">
             <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <ExternalLink
-                absolutePath="tel:+3016767337">Admin Phone
-              </ExternalLink>
+            <RaisedButton 
+                icon={this.cpgAlgIcon()}
+                label="CPG / Algorithms" 
+                onClick={()=>{this.dbGoTo('/resources',false)} }
+                fullWidth={true}
+                buttonStyle={raisedButtonStyles}
+                labelColor={'#fff'}
+                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
+              />
             </div>
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <Link to="/oncall">On Call</Link>
+            <div style={{...buttonItemWrapper,...smallImageRight}}>
+              <div style={{cursor:'pointer'}}>
+              <RaisedButton 
+                icon={this.badgeExtrasIcon()}
+                label="Emergency Codes" 
+                onClick={()=>{getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))} }
+                fullWidth={true}
+                buttonStyle={raisedButtonStyles}
+                labelColor={'#fff'}
+                labelStyle={{buttonLabelStyles,...{fontSize:'9px'}}}
+              />
+              </div>
             </div>
           </div>
         </div>
@@ -123,3 +201,4 @@ export default class DashboardPage extends React.Component<Props, State>{
     )
   }
 }
+export default withRouter(DashboardPage);

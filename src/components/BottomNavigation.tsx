@@ -39,7 +39,8 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import Paper from 'material-ui/Paper';
 import {ActionBookmark} from 'material-ui/svg-icons';
 import {MapsLocalPhone} from 'material-ui/svg-icons';
-import {NotificationEventNote} from 'material-ui/svg-icons';
+import {ActionToday} from 'material-ui/svg-icons';
+import SvgIcon from 'material-ui/SvgIcon';
 
 export interface Props {
   title : string;
@@ -53,8 +54,14 @@ export interface State {
   selectedIndex : number
 }
 const recentsIcon = <MapsLocalPhone />;
-const favoritesIcon = <NotificationEventNote/>;
+const favoritesIcon = <ActionToday />;
 const nearbyIcon = <ActionBookmark />;
+
+const HomeIcon = (props) => (
+  <SvgIcon {...props}>
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+  </SvgIcon>
+);
 
 class BottomNavigationComp extends React.Component<Props, State>{
 
@@ -128,6 +135,11 @@ class BottomNavigationComp extends React.Component<Props, State>{
       <div>
         <Paper zDepth={5} style={this.bottomStylesCalc()}>
         <BottomNavigation selectedIndex={this.state.selectedIndex}>
+          <BottomNavigationItem
+            label="Home"
+            icon={<HomeIcon  color={'red'}/>}
+            onClick={() => this.select(0, {external:false,href:'/'})}
+          />
           <BottomNavigationItem
             label="Phone Directory"
             icon={recentsIcon}

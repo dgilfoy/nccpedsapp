@@ -42,12 +42,12 @@ export const versionStyle = {
 export const buttonRowSpacing = {
   margin: '16px auto 16px auto',
   padding: '16px auto 16px auto',
-  width : '80%',
-  maxWidth: 800
+  width : '85%',
+  maxWidth: 600
 }
 export const smallImage = {
   width : '48%',
-  maxWidth : 244,
+  maxWidth : 260,
   marginBottom: '20px'
 }
 export const smallImageLeft = {
@@ -69,11 +69,8 @@ export const buttonsWrapper = {
   float: 'left'
 }
 export const buttonItemWrapper = {
-  padding: '20px',
-  border : '1px solid',
-  backgroundColor: '#fff',
   width : '25%',
-  minWidth : '200px',
+  minWidth : '100px',
   textAlign : 'center',
   marginRight: '10%',
   marginTop : '20px'

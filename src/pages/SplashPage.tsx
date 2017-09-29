@@ -38,7 +38,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 export interface Props {
-  
+  submitPass : any
 }
 
 export interface State {
@@ -77,7 +77,7 @@ export default class SplashPage extends React.Component<Props, State>{
               />
             </CardText>
             <CardActions>
-              <RaisedButton label="Submit" onClick={()=>{this.submitPass()}} />
+              <RaisedButton label="Submit" onClick={this.props.submitPass} />
             </CardActions>
           </Card>
       </div>

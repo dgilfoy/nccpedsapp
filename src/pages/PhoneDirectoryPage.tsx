@@ -33,19 +33,14 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
-//import {Link} from 'react-router-dom';
 import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import phoneNumbers from '../res/data/phoneDirectory';
 import RaisedButton from 'material-ui/RaisedButton';
-//import FlatButton from 'material-ui/FlatButton';
 import {ActionSearch} from 'material-ui/svg-icons';
 import {MapsLocalPhone} from 'material-ui/svg-icons';
-//import Dialog from 'material-ui/Dialog';
-//import {Card, CardHeader, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
-//import ExternalLink from '../components/ExternalLink';
 
 export interface Props {
   appPage: AppPageInterface;
@@ -82,9 +77,11 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
     )
   }
   showSearchBox(e){
+    //let ele = document.getElementById('searchText');
     this.setState(prevState => ({
       showSearchBar : true
     }));
+    //ele.focus();
   }
   hideSearchBox(e){
     this.setState(prevState => ({
@@ -95,8 +92,8 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
   liveSearch(e){
     let val = e.target['value'],
       results = this.state.phoneDir.filter(function(elem){
-      return elem.title.toLowerCase().indexOf(val) > -1;
-    });
+        return elem.title.toLowerCase().indexOf(val) > -1;
+      });
     this.setState(prevState => ({
       currentList : results
     }));
@@ -104,10 +101,12 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
   searchText(){
     return (
       <div style={{width:'20%', margin:'0 auto', minWidth:'300px'}}>
-        <ActionSearch 
-          viewBox="5 0 15 32"
-        />
-        <TextField id="searchText" hintText="Search the Directory" onChange={this.liveSearch.bind(this)}/>
+        <div style={{width:'10%',float:'left'}}>
+          <ActionSearch viewBox="5 0 15 32" style={{width:'35px',height:'35px',marginTop:'10px'}}/>
+        </div>
+        <div style={{width:'85%',float:'left'}}>
+          <TextField id="searchText" hintText="Search the Directory" onChange={this.liveSearch.bind(this)}/>
+        </div>
       </div>
     )
   }
@@ -123,7 +122,7 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
         <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
         { this.state.showSearchBar ? this.searchText() : ''}
         
-        <div id="phoneDirListWrapper">
+        <div id="phoneDirListWrapper" style={{minHeight:'400px'}}>
           {currentList.map(phone => {
               return (<div style={itemStyle} key={phone.id}>
                 <RaisedButton labelPosition="before" icon={<MapsLocalPhone style={{float:'right',marginTop:'5px'}}/>} label={phone.title} href={'tel:' +phone.number} fullWidth={true}/>
