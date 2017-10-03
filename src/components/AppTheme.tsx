@@ -55,6 +55,7 @@ import {ActionInfoOutline} from 'material-ui/svg-icons';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+const capitolBkgrd = require('../res/images/capitol-building-with-logo.png');
 const muiTheme = getMuiTheme({
   palette: {
     
@@ -224,7 +225,7 @@ class App extends React.Component<Props, State>{
     const ssCardStyles = {
       height : this.state.screen.height,
       backgroundColor: '#043365',
-      background: 'linear-gradient(to bottom, #043365 0%,#094A8F 45%,#0E5DB5 60%,#4390DE 100%)',
+      background: "linear-gradient(to bottom, #043365 0%,#094A8F 40%,#106fce 100%)",
       paddingTop: this.state.screen.height/5
     }
     const actions = [
@@ -235,7 +236,7 @@ class App extends React.Component<Props, State>{
       />
     ];
     return (
-      <div>
+      <div style={{maxWidth:'800px'}}>
         <Card style={ssCardStyles}>
             <CardHeader
               style={{width:'85%',margin:'0 auto',display:'block',textAlign:'center',maxWidth:'800px'}}
@@ -274,6 +275,7 @@ class App extends React.Component<Props, State>{
               <p>Info on where to get a pass phrase here.</p> 
             </Dialog>
           </Card>
+          <img style={{width:'100%',maxWidth:'800px', bottom:'0',position:'absolute'}} src={capitolBkgrd}/>
       </div>
     )
   }

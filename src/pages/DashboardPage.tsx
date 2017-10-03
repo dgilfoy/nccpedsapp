@@ -112,7 +112,7 @@ class DashboardPage extends React.Component<Props, State>{
   cpgAlgIcon(){
     return(
       <div style={{marginLeft:'-10px'}}>
-        <img style={{height:'40px',width:'40px', margin:'0 auto 15px'}} src={cpgSVGIcon} /><br/>
+        <img style={{height:'40px',width:'40px', margin:'-20px auto 15px'}} src={cpgSVGIcon} /><br/>
       </div>
     )
   }
@@ -142,7 +142,7 @@ class DashboardPage extends React.Component<Props, State>{
       lineHeight: '15px'
     }
     return (
-      <div style={{position:'relative', background: 'url(' + logoLarge + ') center no-repeat', height:this.props.appPage.screen.height-96}}>
+      <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom left no-repeat', height:this.props.appPage.screen.height-96}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
         <div style={buttonRowSpacing} className="clearfix rowWrapper">
@@ -196,7 +196,7 @@ class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
         </div>
-        <div style={versionStyle}>0.0.1</div>
+        <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 0.0.1</div>
       </div>
     )
   }

@@ -36,8 +36,9 @@
 export const versionStyle = {
   textAlign : 'center',
   width : '100%',
-  color : '#fff',
-  padding : '5px'
+  color : 'black',
+  padding : '5px',
+  bottom: '-10px'
 }
 export const buttonRowSpacing = {
   margin: '16px auto 16px auto',
