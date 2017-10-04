@@ -90,9 +90,9 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
   }
   
   liveSearch(e){
-    let val = e.target['value'],
+    var val = e.target['value'],
       results = this.state.phoneDir.filter(function(elem){
-        return elem.title.toLowerCase().indexOf(val) > -1;
+        return elem.title.toLowerCase().indexOf(val.toLowerCase()) >= 0;
       });
     this.setState(prevState => ({
       currentList : results
@@ -118,7 +118,7 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
       minWidth : '200px'
     }
     return (
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', height:this.props.appPage.screen.height-86}}>
         <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
         { this.state.showSearchBar ? this.searchText() : ''}
         

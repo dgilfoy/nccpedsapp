@@ -142,7 +142,7 @@ class DashboardPage extends React.Component<Props, State>{
       lineHeight: '15px'
     }
     return (
-      <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom left no-repeat', height:this.props.appPage.screen.height-96}}>
+      <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom center no-repeat', height:this.props.appPage.screen.height-96}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
         <div style={buttonRowSpacing} className="clearfix rowWrapper">
@@ -196,7 +196,7 @@ class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
         </div>
-        <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 0.0.1</div>
+        <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 1.0.0</div>
       </div>
     )
   }

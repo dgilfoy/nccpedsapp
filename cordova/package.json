@@ -11,7 +11,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "cordova-android": "^6.3.0",
-        "cordova-ios": "^4.5.1",
+        "cordova-ios": "^4.4.0",
         "cordova-open": "^1.0.12",
         "cordova-open-native-settings": "^1.4.1",
         "cordova-plugin-app-version": "^0.1.9",

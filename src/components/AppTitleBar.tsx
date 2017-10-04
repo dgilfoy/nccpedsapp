@@ -105,6 +105,7 @@ class AppTitleBar extends React.Component<Props, State>{
     return (
       <div>
         <AppBar
+          style={{backgroundColor:'#A10F1E'}}
           title={this.setTitle(title)}
           iconElementLeft={this.backIcon()}
           onTitleTouchTap={()=>this.goBack(this.props['history'])}
