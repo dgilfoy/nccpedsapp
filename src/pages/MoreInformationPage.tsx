@@ -53,7 +53,7 @@ export default class BadgeExtrasPage extends React.Component<Props, State>{
     //@todo move all of my styles to a folder and do imports and/or use combines
     
     return (
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', height:this.props.appPage.screen.height-86}}>
       <AppTitleBar title="More Information"/>
        <div style={{padding:'10px'}}>
           <h2>How to use the One Call Page</h2>

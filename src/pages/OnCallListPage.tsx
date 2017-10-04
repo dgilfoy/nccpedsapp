@@ -50,6 +50,7 @@ export interface State {}
 
 class OnCallListPage extends React.Component<Props, State>{
   componentWillMount(){  
+    console.log(this.props);
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
@@ -58,7 +59,7 @@ class OnCallListPage extends React.Component<Props, State>{
       padding : '5px'
     }
     return (
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', height:this.props.appPage.screen.height-86}}>
       <AppTitleBar title="One Call Directory"/>
         <div style={{padding:'10px'}}>
           <div style={{width:'20%',float:'left'}}><img style={{width:'90%'}} src={logo} /></div>
