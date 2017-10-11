@@ -38,9 +38,9 @@ import {AppPageInterface} from '../components/AppTheme';
 import phoneNumbers from '../res/data/phoneDirectory';
 import RaisedButton from 'material-ui/RaisedButton';
 import {ActionSearch} from 'material-ui/svg-icons';
-import {MapsLocalPhone} from 'material-ui/svg-icons';
+import {ActionPermContactCalendar} from 'material-ui/svg-icons';
 import TextField from 'material-ui/TextField';
-
+import BottomNavigationComp from '../components/BottomNavigation';
 
 export interface Props {
   appPage: AppPageInterface;
@@ -48,7 +48,8 @@ export interface Props {
 export interface State {
   phoneDir,
   currentList,
-  showSearchBar
+  showSearchBar,
+  screen
 }
 
 export default class PhoneDirectoryPage extends React.Component<Props, State>{
@@ -56,7 +57,8 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
     this.setState({
       phoneDir: phoneNumbers,
       currentList : phoneNumbers,
-      showSearchBar : false
+      showSearchBar : false,
+      screen : this.props.appPage.screen
     });
   }
   searchIcon(){
@@ -113,23 +115,34 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
   render(){
     var {currentList} = this.state;
     const itemStyle = {
-      margin: '20px auto',
-      width : '20%',
-      minWidth : '200px'
+      margin :    '20px auto',
+      width :     '80%',
+      minWidth :  '200px',
+      maxWidth :  '600px',
+      textAlign:  'left'
     }
     return (
-      <div style={{position:'relative', height:this.props.appPage.screen.height-86}}>
-        <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
-        { this.state.showSearchBar ? this.searchText() : ''}
-        
-        <div id="phoneDirListWrapper" style={{minHeight:'400px'}}>
-          {currentList.map(phone => {
-              return (<div style={itemStyle} key={phone.id}>
-                <RaisedButton labelPosition="before" icon={<MapsLocalPhone style={{float:'right',marginTop:'5px'}}/>} label={phone.title} href={'tel:' +phone.number} fullWidth={true}/>
-              </div>)
-            }) 
-          }
+      <div>
+        <div style={{position:'relative', height:this.props.appPage.screen.height-76, overflow:'scroll'}}>
+          <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
+          { this.state.showSearchBar ? this.searchText() : ''}
+          <div id="phoneDirListWrapper" style={{minHeight:'400px'}}>
+            {currentList.map(phone => {
+                return (
+                <div style={itemStyle} key={phone.id}>
+                  <RaisedButton
+                    style={{padding:'5px'}}
+                    buttonStyle={{textAlign:'left'}}
+                    icon={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
+                    labelStyle={{fontSize:'14px', color:'#808080',overflow:'visible'}}
+                    label={phone.title} href={'tel:' +phone.number} fullWidth={true}
+                  />
+                </div>)
+              }) 
+            }
+          </div>
         </div>
+        <BottomNavigationComp screen={this.state.screen}/>
       </div>
     )
   }

@@ -37,8 +37,11 @@ export const versionStyle = {
   textAlign : 'center',
   width : '100%',
   color : 'black',
-  padding : '5px',
-  bottom: '-10px'
+  padding : '10px',
+  bottom: '-25px',
+  backgroundColor : '#fff',
+  float:'left',
+  height: '1em'
 }
 export const buttonRowSpacing = {
   margin: '16px auto 16px auto',

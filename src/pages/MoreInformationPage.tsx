@@ -37,32 +37,40 @@ import * as React from 'react';
 import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import RaisedButton from 'material-ui/RaisedButton';
+import BottomNavigationComp from '../components/BottomNavigation';
 
 //import ExternalLink from '../components/ExternalLink';
 
 export interface Props {
   appPage: AppPageInterface;
 }
-export interface State {}
+export interface State {
+  screen : any;
+}
 
 export default class BadgeExtrasPage extends React.Component<Props, State>{
   componentWillMount(){
-    
+    this.setState({
+      screen : this.props.appPage.screen
+    });
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
     
     return (
-      <div style={{position:'relative', height:this.props.appPage.screen.height-86}}>
-      <AppTitleBar title="More Information"/>
-       <div style={{padding:'10px'}}>
-          <h2>How to use the One Call Page</h2>
-          <p>The One Call page will dial the on-call physician directly for each service. Pediatric Surgery, urology, and  allergy dial the pager access number and pin; 
-            you will need to enter your callback number when prompted.</p>
-          <h3>Operator Assited Paging</h3>
-          <p>You may also access the live operator to page any military pediatric service by calling (or pressing) the number below:</p>
-          <RaisedButton label="1-866-666-2362" href="tel:1-866-666-2362"/>
+      <div>
+        <div style={{position:'relative', height:this.props.appPage.screen.height-10}}>
+        <AppTitleBar title="More Information"/>
+        <div style={{padding:'10px'}}>
+            <h2>How to use the One Call Page</h2>
+            <p>The One Call page will dial the on-call physician directly for each service. Pediatric Surgery, urology, and  allergy dial the pager access number and pin; 
+              you will need to enter your callback number when prompted.</p>
+            <h3>Operator Assited Paging</h3>
+            <p>You may also access the live operator to page any military pediatric service by calling (or pressing) the number below:</p>
+            <RaisedButton label="1-866-666-2362" href="tel:1-866-666-2362"/>
+          </div>
         </div>
+        <BottomNavigationComp screen={this.state.screen}/>
       </div>
     )
   }

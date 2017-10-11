@@ -37,20 +37,30 @@ import { withRouter } from 'react-router-dom';
 import ResourcesContainer from '../containers/ResourcesList';
 import {AppPageInterface} from '../components/AppTheme';
 import AppTitleBar from '../components/AppTitleBar';
+import BottomNavigationComp from '../components/BottomNavigation';
 
 export interface Props {
   appPage: AppPageInterface;
   setPageTitle(title: string): void;
 }
-export interface State {}
+export interface State {
+  screen : any;
+}
 
 class ResourcesPage extends React.Component<Props, State>{
-
+  componentWillMount(){
+    this.setState({
+      screen : this.props.appPage.screen
+    });
+  }
   render(){
     return ( 
       <div>
-        <AppTitleBar title="CPG/Algorithms" />
-        <ResourcesContainer />
+        <div style={{position:'relative', height:this.props.appPage.screen.height-76, overflow:'scroll'}}>
+          <AppTitleBar title="CPG/Algorithms" />
+          <ResourcesContainer />
+        </div>
+        <BottomNavigationComp screen={this.state.screen}/>
       </div>
     );
   }

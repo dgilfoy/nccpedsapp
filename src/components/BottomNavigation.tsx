@@ -34,7 +34,6 @@
  */ 
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import {NavigationChevronLeft} from 'material-ui/svg-icons';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import {ActionBookmark} from 'material-ui/svg-icons';
@@ -79,74 +78,29 @@ class BottomNavigationComp extends React.Component<Props, State>{
   componentWillMount(){
     this.setState( { selectedIndex : 0 });
   }
-  /**
-   * 
-   * 
-   * @param {any} history 
-   * @memberof AppTitleBar
-   */
-  goBack(history){
-    history.goBack();
-  }
-  /**
-   * 
-   * 
-   * @param {any} title 
-   * @returns 
-   * @memberof AppTitleBar
-   */
-  setTitle(title){
-    return (
-      <span>
-        <span style={{paddingBottom:5}}>{...title}</span>
-      </span>
-    );
-  }
-  /**
-   * 
-   * 
-   * @returns 
-   * @memberof AppTitleBar
-   */
-  backIcon(){
-    const leftNavChevSVG = {
-      color : '#fff',
-      marginTop : 10,
-      float : 'left',
-      height : "35px", 
-      width : "15px",
-      cursor : "pointer"
-    }
-    return (
-      <NavigationChevronLeft 
-        viewBox="5 0 15 32" 
-        style={leftNavChevSVG} 
-        onClick={()=>this.goBack(this.props['history'])}/>
-    );
-  }
   bottomStylesCalc(){
     return {
-      marginTop: '10px',
       height : '75px'
     }
   }
   render(){
     return (
-      <div>
+      <div style={{float:'left',position:'absolute',bottom:'0px'}}>
         <Paper zDepth={5} style={this.bottomStylesCalc()}>
         <BottomNavigation selectedIndex={this.state.selectedIndex}>
           <BottomNavigationItem
             label="Home"
+            style={{padding:'5px'}}
             icon={<HomeIcon  color={'red'}/>}
             onClick={() => this.select(0, {external:false,href:'/'})}
           />
           <BottomNavigationItem
-            label="Phone Directory"
+            label="Directory"
             icon={recentsIcon}
             onClick={() => this.select(0, {external:false,href:'/directory'})}
           />
           <BottomNavigationItem
-            label="Academic Calendar"
+            label="Calendar"
             icon={favoritesIcon}
             onClick={() => this.select(false, {external:true,href:'https://calendar.google.com/calendar/embed?src=fuvtodunsk7fvni5rkpsp9cbmk@group.calendar.google.com'})}
           />

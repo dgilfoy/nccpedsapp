@@ -47,6 +47,7 @@ import {getPDF} from '../actions/_helper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {MapsLocalPhone} from 'material-ui/svg-icons';
 import {ActionVerifiedUser} from 'material-ui/svg-icons';
+import BottomNavigationComp from '../components/BottomNavigation';
 
 const logoLarge = require('../res/images/logoLarge.png');
 
@@ -142,7 +143,7 @@ class DashboardPage extends React.Component<Props, State>{
       lineHeight: '15px'
     }
     return (
-      <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom center no-repeat', height:this.props.appPage.screen.height-96}}>
+      <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom center no-repeat', height:this.props.appPage.screen.height-10}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
         <div style={buttonRowSpacing} className="clearfix rowWrapper">
@@ -196,6 +197,7 @@ class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
         </div>
+        <BottomNavigationComp screen={this.state.screen}/>
         <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 1.0.0</div>
       </div>
     )

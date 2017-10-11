@@ -48,7 +48,6 @@ import BasicPage from '../containers/BasicPage';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card,CardActions, CardHeader, CardText} from 'material-ui/Card';
-import BottomNavigationComp from '../components/BottomNavigation';
 import * as CryptoJS from "crypto-js";
 import {passPhrase, passKey} from '../res/data/secPassPhrase';
 import {ActionInfoOutline} from 'material-ui/svg-icons';
@@ -202,7 +201,6 @@ class App extends React.Component<Props, State>{
           <BasicPage>
             <Component appPage={this.getAppPageObject()} />
           </BasicPage>
-          <BottomNavigationComp screen={this.state.screen} />
         </div>
       );
     };

@@ -94,6 +94,7 @@ class ResourcesItem extends React.Component<Props, State>{
    * @memberof ResourcesItem
    */
   listItem(resources) : JSX.Element {
+    //console.log(resources);
     return (
       <ListItem 
         rightIcon={<HardwareKeyboardArrowRight/>}
