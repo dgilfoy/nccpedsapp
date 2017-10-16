@@ -7,7 +7,7 @@
  *
  * Modified by Daniel Gilfoy <daniel.gilfoy@tee2.org> on 7/25/2017.
  *
- * Navy MSC Cordova App
+ * NCC Pediatrics Cordova App
  *
  * Copyright © 2009-2017 United States Government as represented by
  * the Chief Information Officer of the National Center for Telehealth
@@ -122,8 +122,8 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
       textAlign:  'left'
     }
     return (
-      <div>
-        <div style={{position:'relative', height:this.props.appPage.screen.height-76, overflow:'scroll'}}>
+      <div style={{overflow:'hidden',width:'100%',height:'100%'}}>
+        <div style={{position:'relative', height:this.props.appPage.screen.height-76, overflow:'auto', width:'100%'}}>
           <AppTitleBar title="Phone Directory" rightIcon={this.searchIcon()}/>
           { this.state.showSearchBar ? this.searchText() : ''}
           <div id="phoneDirListWrapper" style={{minHeight:'400px'}}>

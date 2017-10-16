@@ -1,2 +1,2 @@
-export const passPhrase = 'U2FsdGVkX1+giRHgrbt2+eYoTbhYE6563iEhtDUm7X0=';
-export const passKey = 'umSomeKeyHere';
+export const passPhrase = 'U2FsdGVkX1+2yUKqsvCgKPXxS/YxyoJNZEgNPbEGjtI=';
+export const passKey = 'NCC Pediatrics Residency 4th Floor, America Bldg Walter Reed National Military Medical Center 8901 Wisconsin Ave Bethesda, MD 20889 301.319.5437';

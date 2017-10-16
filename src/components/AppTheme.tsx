@@ -1,13 +1,11 @@
 /**
  * @file AppTheme.tsx
  * 
- 
  * Name: AppTheme.tsx
  * 
- *
  * Modified by Daniel Gilfoy <daniel.gilfoy@tee2.org> on 7/25/2017.
  *
- * Navy MSC Cordova App
+ * NCC Pediatrics Cordova App
  *
  * Copyright © 2009-2017 United States Government as represented by
  * the Chief Information Officer of the National Center for Telehealth
@@ -171,6 +169,7 @@ class App extends React.Component<Props, State>{
   submitPass( e ) {
     // set the datastore "is authenticated" to be true if the passPhrase is correct
     let uepp = CryptoJS.AES.decrypt(passPhrase,passKey).toString(CryptoJS.enc.Utf8);
+    //console.log(CryptoJS.AES.encrypt(passPhrase,passKey); 
     if(this.state.inputValue == uepp ){
 
       let storage = window.localStorage;
@@ -270,7 +269,7 @@ class App extends React.Component<Props, State>{
               onRequestClose={this.handleRequestClose.bind(this)}
               actions={actions}
             >
-              <p>Info on where to get a pass phrase here.</p> 
+              <p>Contact a supervisor within the Department of Pediatrics or call <a href="tel:301-319-5437" target="_system">301-319-5437</a></p> 
             </Dialog>
           </Card>
           <img style={{width:'100%',maxWidth:'800px', bottom:'0',position:'absolute'}} src={capitolBkgrd}/>

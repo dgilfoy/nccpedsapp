@@ -7,7 +7,7 @@
  *
  * Modified by Daniel Gilfoy <daniel.gilfoy@tee2.org> on 7/25/2017.
  *
- * Navy MSC Cordova App
+ * NCC Pediatrics Cordova App
  *
  * Copyright © 2009-2017 United States Government as represented by
  * the Chief Information Officer of the National Center for Telehealth
