@@ -96,6 +96,9 @@ class App extends React.Component<Props, State>{
       screen: this.state.screen
     }
   }
+  /**
+   * 
+   */
   componentWillMount(){
     let storage = window.localStorage,
       authToken =  storage.getItem('isAuthenticated'),
@@ -111,6 +114,11 @@ class App extends React.Component<Props, State>{
       popoverOpen : false
     });
   }
+  /**
+   * 
+   * 
+   * @memberof App
+   */
   componentDidMount(){
     this.handlePageResize();
   }
@@ -166,6 +174,12 @@ class App extends React.Component<Props, State>{
       }
     }
   }
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * @memberof App
+   */
   submitPass( e ) {
     // set the datastore "is authenticated" to be true if the passPhrase is correct
     let uepp = CryptoJS.AES.decrypt(passPhrase,passKey).toString(CryptoJS.enc.Utf8);
@@ -181,6 +195,12 @@ class App extends React.Component<Props, State>{
       }));
     }
   }
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * @memberof App
+   */
   updateInputValue(e){
     e.persist();
     this.setState(prevState => ({
@@ -204,12 +224,23 @@ class App extends React.Component<Props, State>{
       );
     };
   }
+  /**
+   * 
+   * 
+   * @param {any} event 
+   * @memberof App
+   */
   handleRequestClose(event){
     event.persist();
     this.setState(prevState => ({
       popoverOpen : false
     }));
   }
+  /**
+   * 
+   * 
+   * @memberof App
+   */
   handleTouchTap = (event) => {
     // This prevents ghost click.
     event.preventDefault();
@@ -217,7 +248,12 @@ class App extends React.Component<Props, State>{
     this.setState(prevState => ({
       popoverOpen: true
     }));
-  };
+  }
+  /**
+   * 
+   * 
+   * @memberof App
+   */
   splashScreen = () => {
     const ssCardStyles = {
       height : this.state.screen.height,
@@ -276,6 +312,12 @@ class App extends React.Component<Props, State>{
       </div>
     )
   }
+  /**
+   * 
+   * 
+   * @returns 
+   * @memberof App
+   */
   setOtherRoutes(){
     return (
       <div>
