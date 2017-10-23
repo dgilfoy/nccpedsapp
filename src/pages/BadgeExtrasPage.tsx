@@ -33,7 +33,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
-//import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AppLogoBar  from '../components/AppLogoBar';
 import {AppPageInterface} from '../components/AppTheme';
 
@@ -44,7 +44,7 @@ export interface Props {
 }
 export interface State {}
 
-export default class BadgeExtrasPage extends React.Component<Props, State>{
+class BadgeExtrasPage extends React.Component<Props, State>{
   componentWillMount(){
     
   }
@@ -59,3 +59,4 @@ export default class BadgeExtrasPage extends React.Component<Props, State>{
     )
   }
 }
+export default withRouter(BadgeExtrasPage);

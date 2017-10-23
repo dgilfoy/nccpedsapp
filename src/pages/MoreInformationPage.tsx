@@ -33,7 +33,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
-//import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -48,7 +48,7 @@ export interface State {
   screen : any;
 }
 
-export default class BadgeExtrasPage extends React.Component<Props, State>{
+class MoreInformationPage extends React.Component<Props, State>{
   componentWillMount(){
     this.setState({
       screen : this.props.appPage.screen
@@ -75,3 +75,5 @@ export default class BadgeExtrasPage extends React.Component<Props, State>{
     )
   }
 }
+
+export default withRouter(MoreInformationPage);

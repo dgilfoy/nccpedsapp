@@ -33,6 +33,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */ 
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
 import phoneNumbers from '../res/data/phoneDirectory';
@@ -52,7 +53,7 @@ export interface State {
   screen
 }
 
-export default class PhoneDirectoryPage extends React.Component<Props, State>{
+class PhoneDirectoryPage extends React.Component<Props, State>{
   componentWillMount(){
     this.setState({
       phoneDir: phoneNumbers,
@@ -147,3 +148,5 @@ export default class PhoneDirectoryPage extends React.Component<Props, State>{
     )
   }
 }
+
+export default withRouter(PhoneDirectoryPage);
