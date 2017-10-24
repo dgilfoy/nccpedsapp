@@ -34,7 +34,7 @@
  */ 
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import ResourcesContainer from '../containers/ResourcesList';
+import ResourcesList from '../containers/ResourcesList';
 import {AppPageInterface} from '../components/AppTheme';
 import AppTitleBar from '../components/AppTitleBar';
 import BottomNavigationComp from '../components/BottomNavigation';
@@ -58,7 +58,7 @@ class ResourcesPage extends React.Component<Props, State>{
       <div>
         <div style={{position:'relative', height:this.props.appPage.screen.height-76, overflow:'scroll'}}>
           <AppTitleBar title="CPG/Algorithms" />
-          <ResourcesContainer />
+          <ResourcesList />
         </div>
         <BottomNavigationComp screen={this.state.screen}/>
       </div>

@@ -11,11 +11,7 @@ describe('On Call List Page', () => {
     pageDisplay.instance();
   });
 
-  it('Should click to call NICU number', () => {
-      
-  });
-
-  it('Shoulc click to call PICU number',() => {
+  it('Should click to call a button\'s defined number', () => {
       
   });
 });
