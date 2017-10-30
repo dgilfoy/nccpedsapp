@@ -1,9 +1,11 @@
+ import * as React from 'react';
 import {arrayRemove,arrayPushUnique} from '../_helper';
 
 
 describe('arrayPushUnique', () => {
   it('should only add items if they are not already in the array', () => {
       let test_array = [];
+      console.log(React);
       arrayPushUnique('1',test_array);
       let uniqueArray = arrayPushUnique('1',test_array);
     

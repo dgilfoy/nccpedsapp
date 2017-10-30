@@ -42,6 +42,7 @@ import {ActionSearch} from 'material-ui/svg-icons';
 import {ActionPermContactCalendar} from 'material-ui/svg-icons';
 import TextField from 'material-ui/TextField';
 import BottomNavigationComp from '../components/BottomNavigation';
+import {Card, CardHeader} from 'material-ui/Card';
 
 export interface Props {
   appPage: AppPageInterface;
@@ -113,6 +114,50 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
       </div>
     )
   }
+  getPhoneTitle(phone){
+    return phone.title;
+  }
+  getPhoneSubTitle(phone){
+    let subtitle = '';
+    if(phone.Division.length > 0){
+      subtitle = phone.Division;
+      if( phone.position.length > 0){
+        subtitle += ', ' + phone.position;
+      }
+    }else{
+      if( phone.position.length > 0){
+        subtitle += phone.position;
+      }else{
+        subtitle += phone['first-name'] + ' ' + phone['last-name'];
+      }
+    }
+    return subtitle;
+  }
+  cardItem(phone,itemStyle){
+    return(
+      <div style={itemStyle} key={phone.id} onClick={(e) => {console.log(e)}}>
+        <Card>
+        <CardHeader
+          title={this.getPhoneTitle(phone)}
+          subtitle={this.getPhoneSubTitle(phone)}
+          avatar={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
+        />
+        </Card>
+      </div>
+    )
+  }
+  raisedButtonItem(phone,itemStyle){
+    return (
+      <div style={itemStyle} key={phone.id}>
+        <RaisedButton
+          style={{padding:'5px'}}
+          buttonStyle={{textAlign:'left'}}
+          icon={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
+          labelStyle={{fontSize:'14px', color:'#808080',overflow:'visible'}}
+          label={phone.title} href={'tel:' +phone.number} fullWidth={true}
+        />
+      </div>)
+  }
   render(){
     var {currentList} = this.state;
     const itemStyle = {
@@ -129,16 +174,7 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
           { this.state.showSearchBar ? this.searchText() : ''}
           <div id="phoneDirListWrapper" style={{minHeight:'400px'}}>
             {currentList.map(phone => {
-                return (
-                <div style={itemStyle} key={phone.id}>
-                  <RaisedButton
-                    style={{padding:'5px'}}
-                    buttonStyle={{textAlign:'left'}}
-                    icon={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
-                    labelStyle={{fontSize:'14px', color:'#808080',overflow:'visible'}}
-                    label={phone.title} href={'tel:' +phone.number} fullWidth={true}
-                  />
-                </div>)
+                return this.cardItem(phone,itemStyle);
               }) 
             }
           </div>

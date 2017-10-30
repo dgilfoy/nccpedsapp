@@ -82,7 +82,7 @@ class OnCallListPage extends React.Component<Props, State>{
               label='Call for Admission/Transport'
               labelColor='#fff' 
               fullWidth={true} 
-              href="tel:" 
+              href="tel:18662954913" 
               buttonStyle={{backgroundColor:'#ff3333'}}
             />  
           </div>
@@ -91,7 +91,7 @@ class OnCallListPage extends React.Component<Props, State>{
               <RaisedButton 
                 label='NICU On Call'
                 labelColor='#fff'
-                href="tel:" 
+                href="tel:18662954913" 
                 buttonStyle={{backgroundColor:'#003399', float:'right'}}
               />  
             </div>
@@ -119,7 +119,7 @@ class OnCallListPage extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Allergy'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                   <td>
@@ -149,7 +149,7 @@ class OnCallListPage extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='ENT'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                 </tr>
@@ -204,14 +204,14 @@ class OnCallListPage extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ophtho'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ortho'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                   <td>
@@ -234,14 +234,14 @@ class OnCallListPage extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Surgery'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Urology'
-                      href="tel:" 
+                      href="tel:18662954913" 
                     />
                   </td>
                 </tr>
