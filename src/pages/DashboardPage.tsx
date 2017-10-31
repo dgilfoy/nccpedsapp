@@ -97,7 +97,6 @@ class DashboardPage extends React.Component<Props, State>{
   }
   dbGoTo(url,external=false){
     if( external ){
-      console.log(url);
       return window.open(url,'_system')
     }else{
       this.props['history'].push(url);

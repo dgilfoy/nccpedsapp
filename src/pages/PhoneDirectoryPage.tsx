@@ -92,7 +92,6 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
       showSearchBar : false
     }));  
   }
-  
   liveSearch(e){
     var val = e.target['value'],
       results = this.state.phoneDir.filter(function(elem){
@@ -105,14 +104,17 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
   searchText(){
     return (
       <div style={{width:'20%', margin:'0 auto', minWidth:'300px'}}>
-        <div style={{width:'10%',float:'left'}}>
-          <ActionSearch viewBox="5 0 15 32" style={{width:'35px',height:'35px',marginTop:'10px'}}/>
-        </div>
-        <div style={{width:'85%',float:'left'}}>
-          <TextField id="searchText" hintText="Search the Directory" onChange={this.liveSearch.bind(this)}/>
-        </div>
+        <Card>
+        <CardHeader
+          title={<TextField id="searchText" hintText="Search the Directory" fullWidth={true} onChange={this.liveSearch.bind(this)}/>}
+          avatar={<ActionSearch viewBox="5 0 15 32" style={{width:'35px',height:'35px',marginTop:'10px'}}/>} 
+        />
+        </Card>
       </div>
     )
+  }
+  getPhoneNumber(phone){
+    return phone.number;
   }
   getPhoneTitle(phone){
     return phone.title;
@@ -133,9 +135,12 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
     }
     return subtitle;
   }
+  openDialer(phoneNumber){
+    return window.open('tel://'+phoneNumber,'_system');
+  }
   cardItem(phone,itemStyle){
     return(
-      <div style={itemStyle} key={phone.id} onClick={(e) => {console.log(e)}}>
+      <div style={itemStyle} key={phone.id} onClick={(e) => {this.openDialer(phone.number)}}>
         <Card>
         <CardHeader
           title={this.getPhoneTitle(phone)}
