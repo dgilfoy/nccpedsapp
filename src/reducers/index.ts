@@ -36,6 +36,7 @@ import {
   WINDOW_RESIZE,
   SET_PAGE_TITLE
 } from '../actions';
+import scutdogPdfs from '../res/data/scutdogPdfs';
 import {defaultResources, defaultResourcesIds} from '../res/data/resources';
 
 import {combineReducers} from 'redux';
@@ -68,14 +69,21 @@ const resources = (state = defaultResources, action) => {
 const resourcesIds = (state = defaultResourcesIds, action) => {
   return state;
 }
+
+const scutdogs = (state = scutdogPdfs, action) => {
+  return state;
+}
+
 const isAuthenticated = ( state = true, action) => {
   return state;
 }
+
 const reducer = combineReducers({
   view,
   resources,
   resourcesIds,
-  isAuthenticated
+  isAuthenticated,
+  scutdogs
 });
 
 export default reducer;

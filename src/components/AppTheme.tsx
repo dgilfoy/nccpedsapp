@@ -38,6 +38,7 @@ import BadgeExtrasPage from '../pages/BadgeExtrasPage';
 import OnCallListPage from '../pages/OnCallListPage';
 import MoreInformationPage from '../pages/MoreInformationPage';
 import ResourcesPage from '../pages/ResourcesPage';
+import ScutdogPage from '../pages/ScutdogPage';
 import { Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -326,6 +327,7 @@ class App extends React.Component<Props, State>{
         <Route path="/oncall" render={this.renderRouteComponent(OnCallListPage)} />
         <Route path="/badge-extras" render={this.renderRouteComponent(BadgeExtrasPage)} />
         <Route path="/resources" render={this.renderRouteComponent(ResourcesPage)} />
+        <Route path="/scutdogs" render={this.renderRouteComponent(ScutdogPage)} />
       </div>
     )
   }

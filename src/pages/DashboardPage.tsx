@@ -45,7 +45,7 @@ import {
 } from '../styles/dashboardStyles';
 import {getPDF} from '../actions/_helper';
 import RaisedButton from 'material-ui/RaisedButton';
-import {MapsLocalPhone, CommunicationRingVolume, ActionVerifiedUser} from 'material-ui/svg-icons';
+import {MapsLocalPhone, CommunicationRingVolume, ActionVerifiedUser, ActionBookmark} from 'material-ui/svg-icons';
 import BottomNavigationComp from '../components/BottomNavigation';
 
 const logoLarge = require('../res/images/logoLarge.png');
@@ -85,14 +85,14 @@ class DashboardPage extends React.Component<Props, State>{
         minHeight : '100px'
       },
     containerWidth = ( screenWidth > 800) ? 640 : screenWidth*.8;
-    console.log(containerWidth);
     if( containerWidth < 420 ){
-      let fullWidth = .49 * containerWidth;
-      style.width = fullWidth + 'px';
-    }else{
-      let notFullWidth = .30 * containerWidth;
+      let notFullWidth = .5 * containerWidth;
       style.width = notFullWidth + 'px';
+    }else{
+      let fullWidth = .30 * containerWidth;
+      style.width = fullWidth + 'px';
     }
+    console.log(style.width);
     return style;
   }
   dbGoTo(url,external=false){
@@ -130,6 +130,13 @@ class DashboardPage extends React.Component<Props, State>{
       </div>
     )
   }
+  relayhealthIcon(){
+    return (
+      <div>
+        <ActionBookmark style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-25px',marginLeft:'-15px'}}/>
+      </div>
+    )
+  }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
     const buttonWrapperMinHeight = {
@@ -137,7 +144,7 @@ class DashboardPage extends React.Component<Props, State>{
     }
     const buttonItemWrapper = this.buttonWrapperStyle();
     const raisedButtonStyles = {
-      padding:0, 
+      padding:'0 0 5px 0', 
       height:parseInt(buttonItemWrapper.width) *.85, 
       backgroundColor:'#043365',
       background: 'linear-gradient(to bottom, #0062CF 0%,#094A8F 45%,#0E5DB5 60%,#003168 100%)',
@@ -207,7 +214,7 @@ class DashboardPage extends React.Component<Props, State>{
               <RaisedButton 
                   icon={this.cpgAlgIcon()}
                   label="Scutdog" 
-                  onClick={()=>{getPDF(require('../res/files/Scutdog2017-2018.pdf'))} }
+                  onClick={()=>{this.dbGoTo('/scutdogs')} }
                   fullWidth={true}
                   buttonStyle={raisedButtonStyles}
                   labelColor={'#fff'}
@@ -217,9 +224,9 @@ class DashboardPage extends React.Component<Props, State>{
               <div style={{...buttonItemWrapper,...smallImageRight}}>
                 <div style={{cursor:'pointer'}}>
                 <RaisedButton 
-                  icon={this.badgeExtrasIcon()}
-                  label="TBD" 
-                  onClick={()=>{getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))} }
+                  icon={this.relayhealthIcon()}
+                  label="Relay Health" 
+                  onClick={()=>{this.dbGoTo('https://app.mil.relayhealth.com/',true)} }
                   fullWidth={true}
                   buttonStyle={raisedButtonStyles}
                   labelColor={'#fff'}

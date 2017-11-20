@@ -36,7 +36,6 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
-import {ActionBookmark} from 'material-ui/svg-icons';
 import {MapsLocalPhone} from 'material-ui/svg-icons';
 import {ActionToday} from 'material-ui/svg-icons';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -54,7 +53,6 @@ export interface State {
 }
 const recentsIcon = <MapsLocalPhone />;
 const favoritesIcon = <ActionToday />;
-const nearbyIcon = <ActionBookmark />;
 
 const HomeIcon = (props) => (
   <SvgIcon {...props}>
@@ -103,11 +101,6 @@ class BottomNavigationComp extends React.Component<Props, State>{
             label="Calendar"
             icon={favoritesIcon}
             onClick={() => this.select(false, {external:true,href:'https://calendar.google.com/calendar/embed?src=fuvtodunsk7fvni5rkpsp9cbmk@group.calendar.google.com'})}
-          />
-          <BottomNavigationItem
-            label="RelayHealth"
-            icon={nearbyIcon}
-            onClick={() => this.select(2, {external:true,href:'http://www.relayhealth.com/'})}
           />
         </BottomNavigation>
       </Paper>
