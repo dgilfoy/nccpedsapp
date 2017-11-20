@@ -44,8 +44,7 @@ export const versionStyle = {
   height: '1em'
 }
 export const buttonRowSpacing = {
-  margin: '16px auto 16px auto',
-  padding: '16px auto 16px auto',
+  margin: '0 auto ',
   width : '85%',
   maxWidth: 600
 }

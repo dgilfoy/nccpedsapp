@@ -275,7 +275,7 @@ class App extends React.Component<Props, State>{
               titleStyle={{textAlign:'center',fontSize:'25px',display:'block',width:'100%'}}
               titleColor='#fff'
               textStyle={{width:'98%'}}
-              title="MilitaryPedsApp"
+              title="Military Peds App"
             />
             <CardText>
               <div style={{width:'85%',margin:'0 auto',maxWidth:'800px'}}>

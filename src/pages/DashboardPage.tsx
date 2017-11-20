@@ -45,8 +45,7 @@ import {
 } from '../styles/dashboardStyles';
 import {getPDF} from '../actions/_helper';
 import RaisedButton from 'material-ui/RaisedButton';
-import {MapsLocalPhone} from 'material-ui/svg-icons';
-import {ActionVerifiedUser} from 'material-ui/svg-icons';
+import {MapsLocalPhone, CommunicationRingVolume, ActionVerifiedUser} from 'material-ui/svg-icons';
 import BottomNavigationComp from '../components/BottomNavigation';
 
 const logoLarge = require('../res/images/logoLarge.png');
@@ -86,11 +85,12 @@ class DashboardPage extends React.Component<Props, State>{
         minHeight : '100px'
       },
     containerWidth = ( screenWidth > 800) ? 640 : screenWidth*.8;
+    console.log(containerWidth);
     if( containerWidth < 420 ){
       let fullWidth = .49 * containerWidth;
       style.width = fullWidth + 'px';
     }else{
-      let notFullWidth = .31 * containerWidth;
+      let notFullWidth = .30 * containerWidth;
       style.width = notFullWidth + 'px';
     }
     return style;
@@ -105,21 +105,28 @@ class DashboardPage extends React.Component<Props, State>{
   badgeExtrasIcon(){
     return(
       <div>
-        <ActionVerifiedUser style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-20px',marginLeft:'-15px'}}/><br/>
+        <ActionVerifiedUser style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-25px',marginLeft:'-15px'}}/><br/>
       </div>
     )
   }
   cpgAlgIcon(){
     return(
       <div style={{marginLeft:'-10px'}}>
-        <img style={{height:'40px',width:'40px', margin:'-20px auto 15px'}} src={cpgSVGIcon} /><br/>
+        <img style={{height:'40px',width:'40px', margin:'-25px auto 25px'}} src={cpgSVGIcon} /><br/>
       </div>
     )
   }
   phoneIcon(){
     return (
       <div>
-        <MapsLocalPhone style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-20px',marginLeft:'-15px'}}/><br/>
+        <MapsLocalPhone style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-25px',marginLeft:'-15px'}}/><br/>
+      </div>
+    )
+  }
+  phoneIcon2(){
+    return(
+      <div>
+        <CommunicationRingVolume style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-25px',marginLeft:'-15px'}}/><br/>
       </div>
     )
   }
@@ -130,12 +137,12 @@ class DashboardPage extends React.Component<Props, State>{
     }
     const buttonItemWrapper = this.buttonWrapperStyle();
     const raisedButtonStyles = {
-      padding:'15px', 
-      height:buttonItemWrapper.width, 
+      padding:0, 
+      height:parseInt(buttonItemWrapper.width) *.85, 
       backgroundColor:'#043365',
       background: 'linear-gradient(to bottom, #0062CF 0%,#094A8F 45%,#0E5DB5 60%,#003168 100%)',
       border : '3px groove rgba(161, 15, 30,0.75)',
-      lineHeight : '15px'
+      lineHeight : '14px',
     }
     const buttonLabelStyles = {
       textAlign:'center',
@@ -145,58 +152,84 @@ class DashboardPage extends React.Component<Props, State>{
       <div style={{position:'relative', background: 'url(' + logoLarge + ') bottom center no-repeat', height:this.props.appPage.screen.height-10}}>
        <AppLogoBar hasPaddingTop={false}/>
         <div style={{...buttonsWrapper,...buttonWrapperMinHeight}}>
-        <div style={buttonRowSpacing} className="clearfix rowWrapper">
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-              <RaisedButton
-                icon={this.phoneIcon()} 
-                label="Admin Phone" 
-                onClick={()=>{this.dbGoTo('tel:+3016767337',true)} }
-                fullWidth={true}
-                buttonStyle={raisedButtonStyles}
-                labelColor={'#fff'}
-                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
-              />
-            </div>
-            <div style={{...buttonItemWrapper,...smallImageRight}}>
-            <RaisedButton 
-                icon={this.phoneIcon()} 
-                label="One Call" 
-                onClick={()=>{this.dbGoTo('/oncall',false)} }
-                fullWidth={true}
-                buttonStyle={raisedButtonStyles}
-                labelColor={'#fff'}
-                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
-              />
-            </div>
-          </div>
           <div style={buttonRowSpacing} className="clearfix rowWrapper">
-            <div style={{...buttonItemWrapper,...smallImageLeft}}>
-            <RaisedButton 
-                icon={this.cpgAlgIcon()}
-                label="CPG / Algorithms" 
-                onClick={()=>{this.dbGoTo('/resources',false)} }
-                fullWidth={true}
-                buttonStyle={raisedButtonStyles}
-                labelColor={'#fff'}
-                labelStyle={{buttonLabelStyles,...{fontSize:'10px'}}}
-              />
-            </div>
-            <div style={{...buttonItemWrapper,...smallImageRight}}>
-              <div style={{cursor:'pointer'}}>
+              <div style={{...buttonItemWrapper,...smallImageLeft}}>
+                <RaisedButton
+                  icon={this.phoneIcon()} 
+                  label="Admit Phone" 
+                  onClick={()=>{this.dbGoTo('tel:+3016767337',true)} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+              </div>
+              <div style={{...buttonItemWrapper,...smallImageRight}}>
               <RaisedButton 
-                icon={this.badgeExtrasIcon()}
-                label="Emergency Codes" 
-                onClick={()=>{getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))} }
-                fullWidth={true}
-                buttonStyle={raisedButtonStyles}
-                labelColor={'#fff'}
-                labelStyle={{buttonLabelStyles,...{fontSize:'9px'}}}
-              />
+                  icon={this.phoneIcon2()} 
+                  label="Page On-Call Providers" 
+                  onClick={()=>{this.dbGoTo('/oncall',false)} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+              </div>
+            </div>
+            <div style={buttonRowSpacing} className="clearfix rowWrapper">
+              <div style={{...buttonItemWrapper,...smallImageLeft}}>
+              <RaisedButton 
+                  icon={this.cpgAlgIcon()}
+                  label="CPG / Algorithms" 
+                  onClick={()=>{this.dbGoTo('/resources',false)} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+              </div>
+              <div style={{...buttonItemWrapper,...smallImageRight}}>
+                <div style={{cursor:'pointer'}}>
+                <RaisedButton 
+                  icon={this.badgeExtrasIcon()}
+                  label="Virtual Badge" 
+                  onClick={()=>{getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+                </div>
+              </div>
+            </div>
+            <div style={buttonRowSpacing} className="clearfix rowWrapper">
+              <div style={{...buttonItemWrapper,...smallImageLeft}}>
+              <RaisedButton 
+                  icon={this.cpgAlgIcon()}
+                  label="Scutdog" 
+                  onClick={()=>{getPDF(require('../res/files/Scutdog2017-2018.pdf'))} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+              </div>
+              <div style={{...buttonItemWrapper,...smallImageRight}}>
+                <div style={{cursor:'pointer'}}>
+                <RaisedButton 
+                  icon={this.badgeExtrasIcon()}
+                  label="TBD" 
+                  onClick={()=>{getPDF(require('../res/files/WR-Emerg-Code-Badge.pdf'))} }
+                  fullWidth={true}
+                  buttonStyle={raisedButtonStyles}
+                  labelColor={'#fff'}
+                  labelStyle={{buttonLabelStyles,...{fontSize:'14px',padding:0}}}
+                />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <BottomNavigationComp screen={this.state.screen}/>
+          <BottomNavigationComp screen={this.state.screen}/>
         <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 1.0.0</div>
       </div>
     )

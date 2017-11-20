@@ -85,7 +85,7 @@ class BottomNavigationComp extends React.Component<Props, State>{
   }
   render(){
     return (
-      <div style={{float:'left',position:'absolute',bottom:'0px'}}>
+      <div style={{float:'left',position:'absolute',bottom:'0px', zIndex:9999}}>
         <Paper zDepth={5} style={this.bottomStylesCalc()}>
         <BottomNavigation selectedIndex={this.state.selectedIndex}>
           <BottomNavigationItem

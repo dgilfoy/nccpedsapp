@@ -66,12 +66,12 @@ class OnCallListPage extends React.Component<Props, State>{
     return (
       <div>
         <div style={{position:'relative', height:this.props.appPage.screen.height-75, overflow:'scroll'}}>
-        <AppTitleBar title="One Call Directory"/>
+        <AppTitleBar title="On Call Providers"/>
           <div style={{padding:'10px'}}>
             <div style={{width:'20%',float:'left'}}><img style={{width:'90%'}} src={logo} /></div>
             <div style={{width:'73%', float:'left', backgroundColor:'#003399', color:'#fff', padding:'10px', marginBottom:'10px'}}>
-              <h3 style={{margin:'0 auto'}}>Military Pediatrics OneCall</h3>
-              <p style={{margin:'3px auto'}}>
+              <h4 style={{margin:'0 auto'}}>Military Pediatrics One Call Providers</h4>
+              <p style={{margin:'3px auto',fontSize:13}}>
                 Comprehensive Inpatient &amp; Outpatient Pediatric Subspecialty Care &amp; Consultation 
                 for TRICARE in the MidAtlantic Region &amp; WorldWide
               </p>
