@@ -42,7 +42,8 @@ import {ActionSearch} from 'material-ui/svg-icons';
 import {ActionPermContactCalendar} from 'material-ui/svg-icons';
 import TextField from 'material-ui/TextField';
 import BottomNavigationComp from '../components/BottomNavigation';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 export interface Props {
   appPage: AppPageInterface;
@@ -138,15 +139,27 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
   openDialer(phoneNumber){
     return window.open('tel://'+phoneNumber,'_system');
   }
+  openEmail(emailAddress){
+    return window.open('mailto:'+ emailAddress,'_system');
+  }
   cardItem(phone,itemStyle){
     return(
-      <div style={itemStyle} key={phone.id} onClick={(e) => {this.openDialer(phone.number)}}>
+      <div style={itemStyle} key={phone.id} >
         <Card>
         <CardHeader
-          title={this.getPhoneTitle(phone)}
-          subtitle={this.getPhoneSubTitle(phone)}
+          title={this.getPhoneSubTitle(phone)}
+          subtitle={this.getPhoneTitle(phone)}
+          actAsExpander={true}
+          showExpandableButton={true}
           avatar={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
         />
+        <CardText expandable={true}>
+          Test
+          <CardActions>
+            <FlatButton label='Email' onClick={(e) => {this.openEmail('dgilfoy@gmail.com')}}/>
+            <FlatButton label='Call' onClick={(e) => {this.openDialer(phone.number)}}/>
+          </CardActions>
+        </CardText>
         </Card>
       </div>
     )

@@ -184,7 +184,7 @@ class App extends React.Component<Props, State>{
     // set the datastore "is authenticated" to be true if the passPhrase is correct
     let uepp = CryptoJS.AES.decrypt(passPhrase,passKey).toString(CryptoJS.enc.Utf8);
     //console.log(CryptoJS.AES.encrypt(passPhrase,passKey); 
-    if(this.state.inputValue == uepp ){
+    if(this.state.inputValue.toLowerCase() == uepp ){
 
       let storage = window.localStorage;
       
