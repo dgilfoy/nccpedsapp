@@ -94,13 +94,26 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
     }));  
   }
   liveSearch(e){
-    var val = e.target['value'],
-      results = this.state.phoneDir.filter(function(elem){
-        return elem.title.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+    var matches = function(elem,input){
+      return elem.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    },
+      val = e.target['value'];
+    if( val.length > 1 ){
+      var results = this.state.phoneDir.filter(function(elem,index){
+        if ( matches( elem.LastName, val ) 
+          || matches(elem.FirstName, val ) 
+          || matches(elem.Division, val ) 
+          || matches(elem.Service, val )
+        ){
+          return true;
+        }else{
+          return false;
+        }
       });
-    this.setState(prevState => ({
-      currentList : results
-    }));
+      this.setState(prevState => ({
+        currentList : results
+      }));
+    }
   }
   searchText(){
     return (
@@ -114,26 +127,26 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
       </div>
     )
   }
-  getPhoneNumber(phone){
-    return phone.number;
+  getPhoneSubTitle(phone){
+    return phone.Service;
   }
   getPhoneTitle(phone){
-    return phone.title;
-  }
-  getPhoneSubTitle(phone){
     let subtitle = '';
-    if(phone.Division.length > 0){
-      subtitle = phone.Division;
-      if( phone.position.length > 0){
-        subtitle += ', ' + phone.position;
-      }
+    if(phone.FirstName.length > 0 && phone.LastName.length > 0){
+      subtitle += phone.FirstName + ' ' + phone.LastName;
     }else{
-      if( phone.position.length > 0){
-        subtitle += phone.position;
+      if(phone.Service.length > 0){
+        subtitle = phone.Service;
+        if( phone.Position.length > 0){
+          subtitle += ', ' + phone.Position;
+        }
       }else{
-        subtitle += phone['first-name'] + ' ' + phone['last-name'];
+        if( phone.Position.length > 0){
+          subtitle += phone.Position;
+        }
       }
     }
+    
     return subtitle;
   }
   openDialer(phoneNumber){
@@ -142,22 +155,107 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
   openEmail(emailAddress){
     return window.open('mailto:'+ emailAddress,'_system');
   }
+  getPhoneNumber(phone){
+    if( typeof phone.WorkPhone == 'number' ){
+      return phone.WorkPhone;
+    }else if( typeof phone.WorkPhone == 'string'){
+      // parse to Number and return.
+      if( phone.WorkPhone.length < 10 ){
+        if( typeof phone.CellPhone == 'number'){
+          return phone.CellPhone;
+        }else{
+          if( typeof phone.CellPhone == 'string'){
+            if( phone.CellPhone.length < 10 ){
+              //console.log('item has no work or cell phone item listed', phone );
+              return false;
+            }else{
+              return this.parsePhoneNumber(phone.CellPhone);
+            }
+          }
+        }
+      }
+      return this.parsePhoneNumber(phone.WorkPhone)
+    }
+  }
+  parsePhoneNumber(pnumber){
+      return pnumber.replace(/-/gi,'');
+  }
+  parsePhoneDisplay(phoneNumber){
+    let display = '',
+      phoneNumStr = String(phoneNumber);
+    if( phoneNumStr.length === 10 ){
+      display += '(' + phoneNumStr.substr(0,3) + ') ' + phoneNumStr.substr(3,3) + '-' + phoneNumStr.substr(6,4);
+    }else{
+      display += '(' + phoneNumStr.substr(1,3) + ') ' + phoneNumStr.substr(4,3) + '-' + phoneNumStr.substr(7,4)
+    }
+    return display;
+  }
+  getEmail(phone){
+    let workmail = String(phone.WorkEMail),
+      mailLengthProp = workmail.hasOwnProperty('length');
+    if( mailLengthProp && workmail.length > 1){
+      return workmail;
+    }else{
+      // workmail is not set, check the Personel (Personal?) email;
+      let persmail = String(phone.PersonelEMail);
+      if(persmail.hasOwnProperty('length') && persmail.length > 0 ){
+        return persmail;
+      }else{
+        return false;
+      }
+    }
+  }
+  renderEmailAction(eMail){
+    if(eMail){
+      return (
+        <div onClick={(e) => {this.openEmail(eMail)}}>
+          <label>E-Mail:</label>
+          <FlatButton label={eMail} labelStyle={{fontSize:'12px',textAlign:'left'}}/> 
+        </div>
+      )
+    }
+  }
+  renderPhoneAction(phoneNumber){
+    if( phoneNumber ){
+      return(
+        <div onClick={(e) => {this.openDialer(phoneNumber)}}>
+          <label>Call:</label><br/>
+          <FlatButton label={this.parsePhoneDisplay(phoneNumber)}/>
+        </div>
+      )
+    }
+  }
+  contactInfoMessage(phone,email){
+    if(phone && email) return '';
+    if(!phone){
+      if(!email){
+        return 'There is no phone number or email address listed for this contact.';
+      }else{
+        return 'There is no phone number listed for this contact.';
+      }
+    }else if(!email){
+      // add message that email address isn't listed for this contact.   
+      // return 'There is no email address listed for this contact'; // commented out for too much info, can add back in if desired.
+    }
+  }
   cardItem(phone,itemStyle){
+    var phoneNumber = this.getPhoneNumber(phone);
+    var eMail = this.getEmail(phone);
     return(
       <div style={itemStyle} key={phone.id} >
         <Card>
         <CardHeader
-          title={this.getPhoneSubTitle(phone)}
-          subtitle={this.getPhoneTitle(phone)}
+          title={this.getPhoneTitle(phone)}
+          subtitle={this.getPhoneSubTitle(phone)}
           actAsExpander={true}
           showExpandableButton={true}
           avatar={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
         />
         <CardText expandable={true}>
-          Test
+          <p style={{width:'60%',margin:'0 auto'}}>{this.contactInfoMessage(phoneNumber,eMail)}</p>
           <CardActions>
-            <FlatButton label='Email' onClick={(e) => {this.openEmail('dgilfoy@gmail.com')}}/>
-            <FlatButton label='Call' onClick={(e) => {this.openDialer(phone.number)}}/>
+            {this.renderPhoneAction(phoneNumber)}
+            {this.renderEmailAction(eMail)}
           </CardActions>
         </CardText>
         </Card>

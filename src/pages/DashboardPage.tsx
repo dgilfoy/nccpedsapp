@@ -92,7 +92,6 @@ class DashboardPage extends React.Component<Props, State>{
       let fullWidth = .30 * containerWidth;
       style.width = fullWidth + 'px';
     }
-    console.log(style.width);
     return style;
   }
   dbGoTo(url,external=false){
