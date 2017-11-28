@@ -45,7 +45,7 @@ import {
 } from '../styles/dashboardStyles';
 import {getPDF} from '../actions/_helper';
 import RaisedButton from 'material-ui/RaisedButton';
-import {MapsLocalPhone, CommunicationRingVolume, ActionVerifiedUser, ActionBookmark} from 'material-ui/svg-icons';
+import {MapsLocalPhone, CommunicationRingVolume, ActionVerifiedUser, ActionBookmark, ActionBook} from 'material-ui/svg-icons';
 import BottomNavigationComp from '../components/BottomNavigation';
 
 const logoLarge = require('../res/images/logoLarge.png');
@@ -112,6 +112,13 @@ class DashboardPage extends React.Component<Props, State>{
     return(
       <div style={{marginLeft:'-10px'}}>
         <img style={{height:'40px',width:'40px', margin:'-25px auto 25px'}} src={cpgSVGIcon} /><br/>
+      </div>
+    )
+  }
+  scutdogIcon(){
+    return(
+      <div>
+        <ActionBook style={{color:'#fff',height:'40px',width:'40px',position:'relative',top:'-25px',marginLeft:'-15px'}}/><br/>
       </div>
     )
   }
@@ -211,7 +218,7 @@ class DashboardPage extends React.Component<Props, State>{
             <div style={buttonRowSpacing} className="clearfix rowWrapper">
               <div style={{...buttonItemWrapper,...smallImageLeft}}>
               <RaisedButton 
-                  icon={this.cpgAlgIcon()}
+                  icon={this.scutdogIcon()}
                   label="Scutdog" 
                   onClick={()=>{this.dbGoTo('/scutdogs')} }
                   fullWidth={true}

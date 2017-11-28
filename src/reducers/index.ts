@@ -77,13 +77,16 @@ const scutdogs = (state = scutdogPdfs, action) => {
 const isAuthenticated = ( state = true, action) => {
   return state;
 }
-
+const devicePhone = ( state = '2532790900', action) => {
+  return state;
+}
 const reducer = combineReducers({
   view,
   resources,
   resourcesIds,
   isAuthenticated,
-  scutdogs
+  scutdogs,
+  devicePhone
 });
 
 export default reducer;

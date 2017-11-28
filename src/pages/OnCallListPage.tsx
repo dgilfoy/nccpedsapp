@@ -34,18 +34,16 @@
  */ 
 import * as React from 'react';
 //import {Link} from 'react-router-dom';
-import AppTitleBar  from '../components/AppTitleBar';
 import { withRouter } from 'react-router-dom';
 import {AppPageInterface} from '../components/AppTheme';
-import RaisedButton from 'material-ui/RaisedButton';
 import BottomNavigationComp from '../components/BottomNavigation';
+import OnCallListContainer from '../containers/OnCallListPage';
 //import ExternalLink from '../components/ExternalLink';
-
-const logo = require('../res/images/mpoc.png');
 
 export interface Props {
   appPage: AppPageInterface;
   history: any;
+  devicePhone: any;
 }
 export interface State {
   screen : any;
@@ -59,205 +57,9 @@ class OnCallListPage extends React.Component<Props, State>{
   }
   render(){
     //@todo move all of my styles to a folder and do imports and/or use combines
-    const tButtonStyles ={
-      width : '100%',
-      padding : '5px'
-    }
     return (
       <div>
-        <div style={{position:'relative', height:this.props.appPage.screen.height-75, overflow:'scroll'}}>
-        <AppTitleBar title="On Call Providers"/>
-          <div style={{padding:'10px'}}>
-            <div style={{width:'20%',float:'left'}}><img style={{width:'90%'}} src={logo} /></div>
-            <div style={{width:'73%', float:'left', backgroundColor:'#003399', color:'#fff', padding:'10px', marginBottom:'10px'}}>
-              <h4 style={{margin:'0 auto'}}>Military Pediatrics One Call Providers</h4>
-              <p style={{margin:'3px auto',fontSize:13}}>
-                Comprehensive Inpatient &amp; Outpatient Pediatric Subspecialty Care &amp; Consultation 
-                for TRICARE in the MidAtlantic Region &amp; WorldWide
-              </p>
-            </div>
-          </div>
-          <div style={{width:'90%',margin:'10px auto'}}>
-            <RaisedButton 
-              label='Call for Admission/Transport'
-              labelColor='#fff' 
-              fullWidth={true} 
-              href="tel:18662954913" 
-              buttonStyle={{backgroundColor:'#ff3333'}}
-            />  
-          </div>
-          <div className="clearfix">
-            <div style={{width:'45%', float: 'left', marginLeft:'10%'}}>
-              <RaisedButton 
-                label='NICU On Call'
-                labelColor='#fff'
-                href="tel:18662954913" 
-                buttonStyle={{backgroundColor:'#003399', float:'right'}}
-              />  
-            </div>
-            <div style={{width:'45%', float: 'left'}}>
-              <RaisedButton 
-                label='PICU On Call'
-                labelColor='#fff'
-                href="tel:3016427667"
-                buttonStyle={{backgroundColor:'#003399', float:'left'}}
-              />  
-            </div>
-          </div>
-          <div>
-            <table style={{width:'90%', margin:'10px auto'}}>
-              <tbody>
-                <tr>
-                  <td>
-                    <RaisedButton 
-                      style={tButtonStyles}
-                      label='Adol'
-                      href="tel:3013186999" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Allergy'
-                      href="tel:18662954913" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Cards'
-                      href="tel:3013859330" 
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Devo'
-                      href="tel:3016468276" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Endo'
-                      href="tel:2027133321" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='ENT'
-                      href="tel:18662954913" 
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Genetics'
-                      href="tel:3016469017" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='GI'
-                      href="tel:3016468201" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Heme/Onc'
-                      href="tel:3014124549" 
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='ID'
-                      href="tel:3016480545" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Nephro'
-                      href="tel:6154363962" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Neuro'
-                      href="tel:3014127840" 
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Ophtho'
-                      href="tel:18662954913,,,2022721" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Ortho'
-                      href="tel:18662954913,,,1010530" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Pulm'
-                      href="tel:3016480144" 
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Rheum'
-                      href="tel:3016480641" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Surgery'
-                      href="tel:18662954913" 
-                    />
-                  </td>
-                  <td>
-                    <RaisedButton
-                      style={tButtonStyles} 
-                      label='Urology'
-                      href="tel:18662954913" 
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div style={{width: '45%', margin:'0 auto'}}>
-            <RaisedButton
-              label='More Information'
-                labelColor='#fff' 
-                labelStyle = {{textAlign:'center'}}
-                buttonStyle={{backgroundColor:'#003399'}}
-                onClick={()=>{ this.props.history.push('/more-info') }}
-            />
-          </div>
-        </div>
+        <OnCallListContainer appPage={this.props.appPage}/>
         <BottomNavigationComp screen={this.state.screen}/>
       </div>
     )
