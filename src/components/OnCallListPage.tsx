@@ -78,7 +78,7 @@ export default class ResourcessList extends React.Component<Props, State>{
               </p>
             </div>
           </div>
-          <div  onClick={(e) => {this.testCallbackPhone(devicePhone)}}>
+          <div onClick={(e) => {this.testCallbackPhone(devicePhone)}}>
             TEST Call
           </div>
           <div style={{width:'90%',margin:'10px auto'}}>
