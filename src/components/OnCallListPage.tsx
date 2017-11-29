@@ -153,7 +153,7 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='ENT'
-                      href="tel:18662954913" 
+                      href="tel:18662954913,,,1170900#" 
                     />
                   </td>
                 </tr>
@@ -238,14 +238,14 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Surgery'
-                      href="tel:18662954913" 
+                      href="tel:18662954913,,,20295-4913#" 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Urology'
-                      href="tel:18662954913" 
+                      href="tel:18662954913,,,1701622#" 
                     />
                   </td>
                 </tr>
