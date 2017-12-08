@@ -64,7 +64,7 @@ export default class AppLogoBar extends React.Component<Props, State>{
       <div>
          <div style={(hasPaddingTop) ? logoHeaderWrapper : logoHeaderWrapperNoTopPadding}>
           <div style={(hasPaddingTop) ? logoWrapper : logoWrapperPaddedTop}>
-            <h2 style={{margin:10}}>Military Peds App</h2>
+            <h2 style={{margin:10,fontFamily:'san-serif'}}>Military Peds App</h2>
           </div>
         </div>
       </div>
