@@ -295,7 +295,7 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
             }
           </div>
         </div>
-        <BottomNavigationComp screen={this.state.screen}/>
+        <BottomNavigationComp screen={this.state.screen} pageIndex={1}/>
       </div>
     )
   }

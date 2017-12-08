@@ -45,13 +45,13 @@ export interface Props {
   rightIcon : any;
   screen : any;
   history: any;
+  pageIndex : number;
 }
 
 export interface State {
   hasRighIcon : boolean,
   selectedIndex : number
 }
-const recentsIcon = <MapsLocalPhone />;
 const favoritesIcon = <ActionToday />;
 
 const HomeIcon = (props) => (
@@ -72,9 +72,16 @@ class BottomNavigationComp extends React.Component<Props, State>{
       window.open( linkData.href, '_system' );
     }
   };
-
+  conditionalColor(expectedIndex){
+    if(!this.props.hasOwnProperty('pageIndex')){
+      return (expectedIndex == 0) ? 'rgba(161, 15, 30, 0.75)' : 'rgba(0, 0, 0, 0.54)';
+    }
+    return (expectedIndex == this.props.pageIndex) ? 'rgba(161, 15, 30, 0.75)' : 'rgba(0, 0, 0, 0.54)';
+  }
   componentWillMount(){
-    this.setState( { selectedIndex : 0 });
+    let currpage = ( this.props.hasOwnProperty('pageIndex')) ? this.props.pageIndex : 0;
+    console.log(this.props,currpage);
+    this.setState( { selectedIndex : currpage });
   }
   bottomStylesCalc(){
     return {
@@ -89,13 +96,13 @@ class BottomNavigationComp extends React.Component<Props, State>{
           <BottomNavigationItem
             label="Home"
             style={{padding:'5px'}}
-            icon={<HomeIcon  color={'red'}/>}
+            icon={<HomeIcon  color={this.conditionalColor(0)}/>}
             onClick={() => this.select(0, {external:false,href:'/'})}
           />
           <BottomNavigationItem
             label="Directory"
-            icon={recentsIcon}
-            onClick={() => this.select(0, {external:false,href:'/directory'})}
+            icon={<MapsLocalPhone color={this.conditionalColor(1)}/>}
+            onClick={() => this.select(1, {external:false,href:'/directory'})}
           />
           <BottomNavigationItem
             label="Calendar"
