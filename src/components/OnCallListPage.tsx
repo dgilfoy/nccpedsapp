@@ -36,6 +36,7 @@ import * as React from 'react';
 import AppTitleBar  from '../components/AppTitleBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {AppPageInterface} from '../components/AppTheme';
+import {simHasReadPermission,simRequestReadPermission} from '../actions/_helper';
 
 const logo = require('../res/images/mpoc.png');
 
@@ -45,21 +46,50 @@ export interface Props {
   history: any;
 }
 
-export interface State {}
+export interface State {
+  devicePhone : any;
+}
 
 export default class ResourcessList extends React.Component<Props, State>{
   constructor(props){
     super(props);
-
   }
-  testCallbackPhone(callback){
-    this.openDialer('18662954913,,,1654454#,,,' + callback + '#');  
+  componentWillMount() {
+    this.setState({devicePhone:false});
+    if(__IS_CORDOVA_BUILD__){
+      var _self = this;
+      let mycallBack = () => {
+          if( window.hasOwnProperty('plugins')) {
+            let plugins = window['plugins'];
+            if(simHasReadPermission(plugins.sim, (e)=>{
+              _self.setState(prevState => ({
+                devicePhone : plugins.sim.phoneNumber.replace('+','')
+              }))
+            }, () => {console.log('error')} ) ){
+            }else{
+              simRequestReadPermission(plugins.sim,(e)=>{ 
+                _self.setState(prevState => ({
+                  devicePhone : plugins.sim.phoneNumber.replace('+','')
+              }))}, ()=>{console.log('error getting permission')} );
+            }
+            plugins.sim.getSimInfo( 
+              (info) => { console.log(info,_self) }
+            );
+          }
+      }
+      document.addEventListener("deviceready", mycallBack, false);
+      
+    }
   }
-  openDialer(phoneNumber){
-    return window.open('tel://'+phoneNumber,'_system');
+  formatPagerNumber(phoneNumber,pin,callback=false){
+    let numberString = 'tel://' + phoneNumber + ',' + pin + '#';
+    if( callback ){
+      numberString += ';' + callback + '#';
+    }
+    return numberString;
   }
   render(){
-    const {devicePhone} = this.props;
+    const {devicePhone} = this.state.devicePhone;
     const tButtonStyles ={
       width : '100%',
       padding : '5px'
@@ -77,9 +107,6 @@ export default class ResourcessList extends React.Component<Props, State>{
                 for TRICARE in the MidAtlantic Region &amp; WorldWide
               </p>
             </div>
-          </div>
-          <div onClick={(e) => {this.testCallbackPhone(devicePhone)}}>
-            TEST Call
           </div>
           <div style={{width:'90%',margin:'10px auto'}}>
             <RaisedButton 
@@ -153,7 +180,7 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='ENT'
-                      href="tel:18662954913,,,1170900#" 
+                      href={this.formatPagerNumber("18662954913", "1170900", devicePhone)} 
                     />
                   </td>
                 </tr>
@@ -208,14 +235,14 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ophtho'
-                      href="tel:18662954913,,,2022721" 
+                      href={this.formatPagerNumber("18662954913", "2022721", devicePhone)} 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ortho'
-                      href="tel:18662954913,,,1010530" 
+                      href={this.formatPagerNumber("18662954913", "1010530", devicePhone)} 
                     />
                   </td>
                   <td>
@@ -238,14 +265,14 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Surgery'
-                      href="tel:18662954913,,,20295-4913#" 
+                      href={this.formatPagerNumber("18662954913", "20295-4913", devicePhone)} 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Urology'
-                      href="tel:18662954913,,,1701622#" 
+                      href={this.formatPagerNumber("18662954913", "1701622", devicePhone)} 
                     />
                   </td>
                 </tr>

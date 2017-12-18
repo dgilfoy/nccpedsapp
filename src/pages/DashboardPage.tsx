@@ -243,7 +243,7 @@ class DashboardPage extends React.Component<Props, State>{
             </div>
           </div>
           <BottomNavigationComp screen={this.state.screen}/>
-        <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 1.0.0</div>
+        <div style={{...versionStyle,...{position:'absolute' as 'absolute'}}}>version 1.0.4</div>
       </div>
     )
   }

@@ -78,6 +78,10 @@ const isAuthenticated = ( state = true, action) => {
   return state;
 }
 const devicePhone = ( state = '2532790900', action) => {
+  switch(action.type){
+    case "DEVICE_READY":
+      break;
+  }
   return state;
 }
 const reducer = combineReducers({

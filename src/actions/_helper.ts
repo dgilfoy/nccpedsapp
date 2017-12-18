@@ -69,3 +69,13 @@ export const getPDF = function(file){
    (window as any).open(encodeURI(file), '_system');
  }
 }
+
+// Android only: check permission
+export const simHasReadPermission = function(sim,successCallback,errorCallback) {
+  sim.hasReadPermission(successCallback, errorCallback);
+}
+
+// Android only: request permission
+export const simRequestReadPermission = function(sim,successCallback,errorCallback) {
+  sim.requestReadPermission(successCallback, errorCallback);
+}
