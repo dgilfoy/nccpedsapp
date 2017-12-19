@@ -44,6 +44,7 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './components/AppTheme';
 import reducer from './reducers';
+import fetchDisplayPhone from './actions/simDevice'
 
 injectTapEventPlugin();
 require('./index.html'); //load and emit index.html
@@ -59,7 +60,7 @@ store.subscribe(() => {
 
 if(__IS_CORDOVA_BUILD__){
   // seems to have issues with ios, commenting out for now.
-  //store.dispatch(fetchVersion());
+  store.dispatch(fetchDisplayPhone());
 }
 
 // creates the render for the app and passes the store into the Provider.

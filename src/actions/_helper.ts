@@ -72,10 +72,10 @@ export const getPDF = function(file){
 
 // Android only: check permission
 export const simHasReadPermission = function(sim,successCallback,errorCallback) {
-  sim.hasReadPermission(successCallback, errorCallback);
+  return sim.hasReadPermission(successCallback, errorCallback);
 }
 
 // Android only: request permission
 export const simRequestReadPermission = function(sim,successCallback,errorCallback) {
-  sim.requestReadPermission(successCallback, errorCallback);
+  return sim.requestReadPermission(successCallback, errorCallback);
 }

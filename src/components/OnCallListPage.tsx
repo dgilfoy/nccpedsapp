@@ -36,7 +36,6 @@ import * as React from 'react';
 import AppTitleBar  from '../components/AppTitleBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {AppPageInterface} from '../components/AppTheme';
-import {simHasReadPermission,simRequestReadPermission} from '../actions/_helper';
 
 const logo = require('../res/images/mpoc.png');
 
@@ -47,7 +46,6 @@ export interface Props {
 }
 
 export interface State {
-  devicePhone : any;
 }
 
 export default class ResourcessList extends React.Component<Props, State>{
@@ -55,31 +53,7 @@ export default class ResourcessList extends React.Component<Props, State>{
     super(props);
   }
   componentWillMount() {
-    this.setState({devicePhone:false});
-    if(__IS_CORDOVA_BUILD__){
-      var _self = this;
-      let mycallBack = () => {
-          if( window.hasOwnProperty('plugins')) {
-            let plugins = window['plugins'];
-            if(simHasReadPermission(plugins.sim, (e)=>{
-              _self.setState(prevState => ({
-                devicePhone : plugins.sim.phoneNumber.replace('+','')
-              }))
-            }, () => {console.log('error')} ) ){
-            }else{
-              simRequestReadPermission(plugins.sim,(e)=>{ 
-                _self.setState(prevState => ({
-                  devicePhone : plugins.sim.phoneNumber.replace('+','')
-              }))}, ()=>{console.log('error getting permission')} );
-            }
-            plugins.sim.getSimInfo( 
-              (info) => { console.log(info,_self) }
-            );
-          }
-      }
-      document.addEventListener("deviceready", mycallBack, false);
-      
-    }
+    
   }
   formatPagerNumber(phoneNumber,pin,callback=false){
     let numberString = 'tel://' + phoneNumber + ',' + pin + '#';
@@ -88,12 +62,12 @@ export default class ResourcessList extends React.Component<Props, State>{
     }
     return numberString;
   }
-  render(){
-    const {devicePhone} = this.state.devicePhone;
+  render(){7
     const tButtonStyles ={
       width : '100%',
       padding : '5px'
     }
+    const {devicePhone} = this.props;
     return (
       <div style={{backgroundColor:"#fff"}}>
         <div style={{position:'relative', height:this.props.appPage.screen.height-75, overflow:'scroll'}}>
@@ -180,7 +154,7 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='ENT'
-                      href={this.formatPagerNumber("18662954913", "1170900", devicePhone)} 
+                      href={this.formatPagerNumber("18662954913", "1170900",devicePhone)} 
                     />
                   </td>
                 </tr>
@@ -235,14 +209,14 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ophtho'
-                      href={this.formatPagerNumber("18662954913", "2022721", devicePhone)} 
+                      href={this.formatPagerNumber("18662954913", "2022721",devicePhone)} 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Ortho'
-                      href={this.formatPagerNumber("18662954913", "1010530", devicePhone)} 
+                      href={this.formatPagerNumber("18662954913", "1010530",devicePhone)} 
                     />
                   </td>
                   <td>
@@ -265,14 +239,14 @@ export default class ResourcessList extends React.Component<Props, State>{
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Surgery'
-                      href={this.formatPagerNumber("18662954913", "20295-4913", devicePhone)} 
+                      href={this.formatPagerNumber("18662954913", "20295-4913",devicePhone)} 
                     />
                   </td>
                   <td>
                     <RaisedButton
                       style={tButtonStyles} 
                       label='Urology'
-                      href={this.formatPagerNumber("18662954913", "1701622", devicePhone)} 
+                      href={this.formatPagerNumber("18662954913", "1701622",devicePhone)} 
                     />
                   </td>
                 </tr>

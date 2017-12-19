@@ -80,7 +80,6 @@ class BottomNavigationComp extends React.Component<Props, State>{
   }
   componentWillMount(){
     let currpage = ( this.props.hasOwnProperty('pageIndex')) ? this.props.pageIndex : 0;
-    console.log(this.props,currpage);
     this.setState( { selectedIndex : currpage });
   }
   bottomStylesCalc(){

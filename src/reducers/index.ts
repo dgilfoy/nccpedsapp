@@ -38,7 +38,7 @@ import {
 } from '../actions';
 import scutdogPdfs from '../res/data/scutdogPdfs';
 import {defaultResources, defaultResourcesIds} from '../res/data/resources';
-
+import {REQUEST_DISPLAY_PHONE,RECEIVE_DISPLAY_PHONE} from '../actions/simDevice';
 import {combineReducers} from 'redux';
 
 
@@ -77,9 +77,12 @@ const scutdogs = (state = scutdogPdfs, action) => {
 const isAuthenticated = ( state = true, action) => {
   return state;
 }
-const devicePhone = ( state = '2532790900', action) => {
+const devicePhone = ( state = "", action) => {
   switch(action.type){
-    case "DEVICE_READY":
+    case REQUEST_DISPLAY_PHONE:
+      break;
+    case RECEIVE_DISPLAY_PHONE:
+      state = action.phone;
       break;
   }
   return state;

@@ -34,6 +34,7 @@
  */ 
 export const WINDOW_RESIZE = 'T2.WINDOW_RESIZE';
 export const SET_PAGE_TITLE = 'T2.SET_PAGE_TITLE';
+export const SET_DEVICE_PHONE = 'T2.SET_DEVICE_PHONE'
 
 export const setPageTitle = (title:string) => {
   return {
@@ -50,3 +51,8 @@ export const windowResize = (width:number,height: number) => {
   }
 }
 
+export const setDevicePhone = (phone:string) => {
+  return {
+
+  }
+}
