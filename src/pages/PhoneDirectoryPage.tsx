@@ -36,7 +36,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import AppTitleBar  from '../components/AppTitleBar';
 import {AppPageInterface} from '../components/AppTheme';
-import phoneNumbers from '../res/data/phoneDirectory';
+import phoneNumbers from '../res/data/phoneDirectory2018';
 import RaisedButton from 'material-ui/RaisedButton';
 import {ActionSearch} from 'material-ui/svg-icons';
 import {ActionPermContactCalendar} from 'material-ui/svg-icons';
