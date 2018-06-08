@@ -55,6 +55,8 @@ export interface State {
   screen
 }
 
+let blurTimeout;
+
 class PhoneDirectoryPage extends React.Component<Props, State>{
   componentWillMount(){
     this.setState({
@@ -110,9 +112,18 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
           return false;
         }
       });
+        
       this.setState(prevState => ({
         currentList : results
       }));
+        if(blurTimeout != null) {
+            clearTimeout(blurTimeout);
+            blurTimeout = null;
+        }
+        
+        blurTimeout = setTimeout(() => {
+            (this.refs["searchText"] as TextField).blur();
+        }, 1000);
     }
   }
   searchText(){
@@ -120,7 +131,7 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
       <div style={{width:'20%', margin:'0 auto', minWidth:'300px'}}>
         <Card>
         <CardHeader
-          title={<TextField id="searchText" hintText="Search the Directory" fullWidth={true} onChange={this.liveSearch.bind(this)}/>}
+          title={<TextField id="searchText" ref="searchText" hintText="Search the Directory" fullWidth={true} onChange={this.liveSearch.bind(this)}/>}
           avatar={<ActionSearch viewBox="5 0 15 32" style={{width:'35px',height:'35px',marginTop:'10px'}}/>} 
         />
         </Card>
@@ -134,6 +145,8 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
     let subtitle = '';
     if(phone.FirstName.length > 0 && phone.LastName.length > 0){
       subtitle += phone.FirstName + ' ' + phone.LastName;
+    }else if(phone.LastName.length > 0) {
+        subtitle += phone.LastName;
     }else{
       if(phone.Service.length > 0){
         subtitle = phone.Service;
@@ -197,7 +210,7 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
       return workmail;
     }else{
       // workmail is not set, check the Personel (Personal?) email;
-      let persmail = String(phone.PersonelEMail);
+      let persmail = String(phone.PersonalEMail);
       if(persmail.hasOwnProperty('length') && persmail.length > 0 ){
         return persmail;
       }else{
@@ -206,7 +219,7 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
     }
   }
   renderEmailAction(eMail){
-    if(eMail){
+    if(eMail !== false){
       return (
         <div onClick={(e) => {this.openEmail(eMail)}}>
           <label>E-Mail:</label>
@@ -242,14 +255,14 @@ class PhoneDirectoryPage extends React.Component<Props, State>{
     var phoneNumber = this.getPhoneNumber(phone);
     var eMail = this.getEmail(phone);
     return(
-      <div style={itemStyle} key={phone.id} >
+      <div style={itemStyle} key={phone.id}>
         <Card>
         <CardHeader
           title={this.getPhoneTitle(phone)}
           subtitle={this.getPhoneSubTitle(phone)}
           actAsExpander={true}
           showExpandableButton={true}
-          avatar={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>} 
+          avatar={<ActionPermContactCalendar color='rgb(161, 15, 30)' style={{float:'left',marginTop:'5px',marginLeft:'10px'}}/>}
         />
         <CardText expandable={true}>
           <p style={{width:'60%',margin:'0 auto'}}>{this.contactInfoMessage(phoneNumber,eMail)}</p>
